@@ -1,0 +1,2 @@
+class Existence < ApplicationRecord
+end
