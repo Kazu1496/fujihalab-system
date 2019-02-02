@@ -1,24 +1,12 @@
-# README
+# 移動しました[2357gi/who_is_there](https://github.com/2357gi/who_is_there)
+- 過去に生成したmigrationFileをイジらないだとか
+- きれいなDB設計だとか
+そこらへん詳しく理解しないままやっちゃったからシッチャカメッチャカになっちゃった。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+### 学び
+- railsの設計思想を汲み取ろう
+- DB設計は事前に一度まとめよう
+- DBに変更を加えるときはmigration fileを生成し、変更を時系列で残そう
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
