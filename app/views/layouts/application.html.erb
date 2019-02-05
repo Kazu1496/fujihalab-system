@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>InAnyoneLab</title>
+    <title><%= yield(:title) %> | 藤原研入退室情報</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
 
+  </head>
   <body>
-    <%= yield %>
+  <header class="nav nav-wapper">
+    <nav>
+      <%= link_to "藤原研 在室情報", '#', id: "logo" %>
+    </nav>
+  </header>
+  <div class="container">
+  <%= yield %>
+  </div>
   </body>
 </html>
+
+
+<style>
+  th{
+
+  }
+</style>

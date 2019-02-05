@@ -7,13 +7,17 @@
 
 <p>
   <strong>Status:</strong>
-  <%= @user.status %>
+  <%= @user.status ? '在籍中' : '退室中' %>
 </p>
 
 <p>
   <strong>Total:</strong>
-  <%= @user.total %>
+  <%= @user.total%>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<p>
+  <strong>卒業まで:</strong>
+  <%= 500 - @user.total %>
+</p>
+
 <%= link_to 'Back', users_path %>
