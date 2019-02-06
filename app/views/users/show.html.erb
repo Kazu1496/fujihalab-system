@@ -12,12 +12,37 @@
 
 <p>
   <strong>Total:</strong>
-  <%= @user.total%>
+  <%= @user.total / 60 %>
 </p>
 
 <p>
   <strong>卒業まで:</strong>
-  <%= 500 - @user.total %>
+  <%= 500 - @user.total / 60 %>
+</p>
+
+<p>
+  <strong>過去30日の入室履歴</strong>
+<table>
+  <thead>
+  <tr>
+    <th>入室日</th>
+    <th>入室時間</th>
+    <th>退室時間</th>
+    <th>在室時間</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @user.existences.each do |existetnce| %>
+    <tr>
+      <td><%= existetnce.enter_time %></td>
+      <td><%= existetnce.enter_time %></td>
+      <td><%= existetnce.exit_time %></td>
+      <td><%= existetnce.stay_time / 60 %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 </p>
 
 <%= link_to 'Back', users_path %>

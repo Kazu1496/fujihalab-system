@@ -16,7 +16,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
-        <td><%= user.status ? '在籍中' : '退室中' %></td>
+        <td><%= user.status == 1 ? '入室中' : '退室中' %></td>
         <td><%= user.total / 60 %></td>
         <td><%= link_to 'Show', user %></td>
       </tr>
