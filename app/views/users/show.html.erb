@@ -1,17 +1,17 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>名前:</strong>
   <%= @user.name %>
 </p>
 
 <p>
-  <strong>Status:</strong>
-  <%= @user.status ? '在籍中' : '退室中' %>
+  <strong>在室状況:</strong>
+  <%= @user.status ? '在室中' : '退室中' %>
 </p>
 
 <p>
-  <strong>Total:</strong>
+  <strong>総入室時間:</strong>
   <%= @user.total / 60 %>
 </p>
 
@@ -21,7 +21,7 @@
 </p>
 
 <p>
-  <strong>過去30日の入室履歴</strong>
+  <strong>過去30日の入室履歴:</strong>
 <table>
   <thead>
   <tr>
@@ -35,9 +35,9 @@
   <tbody>
   <% @user.existences.each do |existetnce| %>
     <tr>
-      <td><%= existetnce.enter_time %></td>
-      <td><%= existetnce.enter_time %></td>
-      <td><%= existetnce.exit_time %></td>
+      <td><%= existetnce.enter_time.strftime("%Y年%m月%d日") %></td>
+      <td><%= existetnce.enter_time.strftime("%H時%M分") %></td>
+      <td><%= datetime_encorder existetnce.exit_time %></td>
       <td><%= existetnce.stay_time / 60 %></td>
     </tr>
   <% end %>
