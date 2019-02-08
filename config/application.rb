@@ -15,16 +15,12 @@ module InAnyoneLab
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-  end
-end
-
-module Sample
-  class Application < Rails::Application
     config.middleware.use Rack::Access,{
         "api/v1/existence" => ["127.0.0.1", LAB_IP_ADDRESS]
     }
   end
 end
+
 
 private
 LAB_IP_ADDRESS = '000.000.000.000'
