@@ -7,6 +7,9 @@ class Api::V1::ExistenceController < ApplicationController
     # curl -X POST -H "Content-Type: application/json" -d '{"name": "Buri", "status": true}' http://0.0.0.0:3000/api/v1/existence
     # ```
 
+
+
+
     now_time = Time.now
 
     name = params[:name]
