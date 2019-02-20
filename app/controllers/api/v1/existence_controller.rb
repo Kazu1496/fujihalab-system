@@ -16,22 +16,24 @@ class Api::V1::ExistenceController < ApplicationController
     status = params[:status]
 
     user = User.find_or_create_by(name: name)
-    existence = user.existences.order(:updated_at).find_or_create_by!(user_id: user.id)
 
 
-    diff = if existence.enter_time
-             (now_time - Time.parse(existence.enter_time.to_s)) / 60
-           else
-             0
-           end
-
-    total = diff + user.total
 
     if status
+      existence = user.existences.order(:updated_at).create(user_id: user.id)
       user.update!(status: true)
       existence.update!(enter_time: now_time)
       p 'status = true'
     else
+      existence = user.existences.order(enter_time: :desc).take
+
+      diff = if existence.enter_time
+               (now_time - Time.parse(existence.enter_time.to_s)) / 60
+             else
+               0
+             end
+
+      total = diff + user.total
       user.update!(status: false, total: total)
       existence.update!(exit_time: now_time, stay_time: diff)
       p 'status = false'
