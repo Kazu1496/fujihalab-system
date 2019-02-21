@@ -10,17 +10,16 @@ module InAnyoneLab
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
+    config.middleware.use Rack::Attack
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-    config.middleware.use Rack::Access,{
-        "api/v1/existence" => ["127.0.0.1", LAB_IP_ADDRESS]
-    }
+    Rack::Attack.safelist('allow from whitelist') do |req|
+      req.path == '/api/v1/existence' && '127.0.0.1' == req.ip || ENV['LAB_IP_ADDRESS'] == req.ip
+    end
   end
 end
 
 
-private
-LAB_IP_ADDRESS = '000.000.000.000'

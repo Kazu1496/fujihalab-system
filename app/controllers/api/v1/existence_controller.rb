@@ -10,7 +10,7 @@ class Api::V1::ExistenceController < ApplicationController
 
 
 
-    now_time = Time.now
+    now_time = Time.now()
 
     name = params[:name]
     status = params[:status]
