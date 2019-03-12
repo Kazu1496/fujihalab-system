@@ -1,3 +1,5 @@
+<% provide(:title, 'Home') %>
+
 <%= form_with(model: user, local: true) do |form| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
@@ -19,11 +21,6 @@
   <div class="field">
     <%= form.label :status %>
     <%= form.check_box :status %>
-  </div>
-
-  <div class="field">
-    <%= form.label :total %>
-    <%= form.number_field :total %>
   </div>
 
   <div class="actions">
