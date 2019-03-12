@@ -1,5 +1,4 @@
 <p id="notice"><%= notice %></p>
-<%= ENV['LAB_IP_ADDRESS'] %>
 
 <p>
   <strong>名前:</strong>
@@ -13,12 +12,12 @@
 
 <p>
   <strong>総入室時間:</strong>
-  <%= @user.total / 60 %>
+  <%= @user.total.to_i / 60 %>
 </p>
 
 <p>
   <strong>卒業まで:</strong>
-  <%= 500 - @user.total / 60 %>
+  <%= ( 500 - @user.total.to_i / 60 ) / 60 %>日
 </p>
 
 <p>
@@ -34,12 +33,12 @@
   </thead>
 
   <tbody>
-  <% @user.existences.each do |existetnce| %>
+  <% @user.existences.each do |existence| %>
     <tr>
-      <td><%= existetnce.enter_time.strftime("%Y年%m月%d日") %></td>
-      <td><%= existetnce.enter_time.strftime("%H時%M分") %></td>
-      <td><%= datetime_encorder existetnce.exit_time %></td>
-      <td><%= existetnce.stay_time / 60 %></td>
+      <td><%= existence.enter_time.strftime("%Y年%m月%d日") %></td>
+      <td><%= existence.enter_time.strftime("%H:%M") %></td>
+      <td><%= datetime_encorder(existence.exit_time) %></td>
+      <td><%= stay_time(existence.enter_time, existence.exit_time) %></td>
     </tr>
   <% end %>
   </tbody>
