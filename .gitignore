@@ -23,6 +23,9 @@
 /storage/*
 !/storage/.keep
 
+# Ignore CarrierWave upload folder files.
+public/uploads
+
 /node_modules
 /yarn-error.log
 
