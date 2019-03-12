@@ -8,6 +8,7 @@ class Api::V1::ExistenceController < ApplicationController
     # ```
 
 
+    seacret_token = ENV[seacret_taken]
 
 
     now_time = Time.now()
@@ -23,7 +24,7 @@ class Api::V1::ExistenceController < ApplicationController
       existence = user.existences.order(:updated_at).create(user_id: user.id)
       user.update!(status: true)
       existence.update!(enter_time: now_time)
-      p 'status = true'
+
     else
       existence = user.existences.order(enter_time: :desc).take
 
@@ -36,7 +37,6 @@ class Api::V1::ExistenceController < ApplicationController
       total = diff + user.total
       user.update!(status: false, total: total)
       existence.update!(exit_time: now_time, stay_time: diff)
-      p 'status = false'
     end
   end
 

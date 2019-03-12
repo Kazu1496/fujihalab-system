@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_04_170849) do
+ActiveRecord::Schema.define(version: 2019_02_01_134322) do
 
   create_table "existences", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "name_id"
     t.datetime "enter_time"
     t.datetime "exit_time"
     t.integer "stay_time", default: 0
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2019_02_04_170849) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.integer "status", default: 1
+    t.boolean "status", default: false
     t.integer "total", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
