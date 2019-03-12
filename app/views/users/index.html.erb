@@ -17,7 +17,7 @@
       <tr>
         <td><%= user.name %></td>
         <td><%= user.status == 1 ? '入室中' : '退室中' %></td>
-        <td><%= user.total / 60 %></td>
+        <td><%= user.total.to_i / 60 %></td>
         <td><%= link_to 'Show', user %></td>
       </tr>
     <% end %>
