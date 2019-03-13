@@ -5,6 +5,7 @@ ruby '2.6.0'
 gem 'rails', '~> 5.2.2'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
+gem 'haml-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
@@ -14,6 +15,9 @@ gem 'rack-attack', '~> 5.0.1'
 gem 'dotenv-rails'
 gem 'materialize-sass'
 gem 'rack-attack', '~> 5.0.1'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'bcrypt'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

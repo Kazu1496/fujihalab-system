@@ -1,0 +1,44 @@
+%p#notice= notice
+
+%p
+  %strong 名前:
+  = @user.name
+  = image_tag(@user.image.retina.to_s, size: '100x100')
+
+%p
+  %strong 在室状況:
+  = @user.status ? '在室中' : '退室中'
+
+%p
+  %strong 総入室時間:
+  = @user.total.to_i / 60
+
+%p
+  %strong 卒業まで:
+  = ( 500 - @user.total.to_i / 60 ) / 60
+  日
+
+%p
+  %strong プロフィール設定:
+  = link_to "Edit", edit_user_path(@user)
+
+%iframe{src: "https://pixe.la/v1/users/#{@user.name}/graphs/access-graph", width:"700", height: "150"}
+
+%p
+  %strong 過去30日の入室履歴:
+%table
+  %thead
+  %tr
+    %th 入室日
+    %th 入室時間
+    %th 退室時間
+    %th 在室時間
+  %tbody
+    - @user.existences.each do |existence|
+      %tr
+        %td= existence.enter_time.strftime("%Y年%m月%d日")
+        %td= existence.enter_time.strftime("%H:%M")
+        %td= datetime_encorder(existence.exit_time)
+        %td= stay_time(existence.enter_time, existence.exit_time)
+
+= link_to 'Back', users_path
