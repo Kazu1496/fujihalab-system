@@ -1,0 +1,17 @@
+- provide(:title, 'Home')
+%p#notice= notice
+
+%table
+  %thead
+    %tr
+      %th 氏名
+      %th 在室情報
+      %th 総入室時間 [時間]
+      %th 詳細情報
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.name
+        %td= user.status == 1 ? '入室中' : '退室中'
+        %td= user.total.to_i / 60
+        %td= link_to 'Show', user
