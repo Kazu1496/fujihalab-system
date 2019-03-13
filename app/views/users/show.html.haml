@@ -7,16 +7,16 @@
 
 %p
   %strong 在室状況:
-  = @user.status ? '在室中' : '退室中'
+  = @user.status == 1 ? '入室中' : '退室中'
 
 %p
   %strong 総入室時間:
-  = @user.total.to_i / 60
+  = @total_time
 
 %p
   %strong 卒業まで:
-  = ( 500 - @user.total.to_i / 60 ) / 60
-  日
+  = 500 - @total_time
+  時間
 
 %p
   %strong プロフィール設定:
@@ -33,6 +33,7 @@
     %th 入室時間
     %th 退室時間
     %th 在室時間
+    %th 編集
   %tbody
     - @user.existences.each do |existence|
       %tr
@@ -40,5 +41,6 @@
         %td= existence.enter_time.strftime("%H:%M")
         %td= datetime_encorder(existence.exit_time)
         %td= stay_time(existence.enter_time, existence.exit_time)
+        %td= link_to "Edit", edit_user_existence_path(@user, existence.id)
 
-= link_to 'Back', users_path
+= link_to 'Back', root_path

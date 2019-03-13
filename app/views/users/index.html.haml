@@ -11,7 +11,16 @@
   %tbody
     - @users.each do |user|
       %tr
-        %td= user.name
+        %td
+          = image_tag(user.image.retina.to_s, size: '50x50')
+          = user.name
+          (
+          = user.id
+          )
         %td= user.status == 1 ? '入室中' : '退室中'
-        %td= user.total.to_i / 60
+        - total_time = 0
+        - Existence.where(user_id: user.id).each do |existence|
+          - stay_time = stay_time(existence.enter_time, existence.exit_time)
+          - total_time += stay_time.to_i
+        %td= total_time
         %td= link_to 'Show', user

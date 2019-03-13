@@ -1,0 +1,27 @@
+- provide(:title, 'Edit')
+- if flash[:alert].present?
+  %p= flash[:alert]
+
+= form_for @existence, url: { action: 'update' } do |f|
+  .field
+    %strong 変更前（入室時間）
+    %p= @existence.enter_time.present? ? datetime_encorder(@existence.enter_time) : "記録なし"
+
+  .field
+    %strong 変更後（入室時間）
+    = f.label :enter_time
+    = f.time_field :enter_time
+
+  .field
+    %strong 変更前（退室時間）
+    %p= @existence.exit_time.present? ? datetime_encorder(@existence.exit_time) : "記録なし"
+
+  .field
+    %strong 変更後（退室時間）
+    = f.label :exit_time
+    = f.time_field :exit_time
+
+  .actions
+    = f.submit '更新する'
+
+= link_to 'Back', user_path(@existence)
