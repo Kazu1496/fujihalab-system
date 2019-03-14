@@ -1,6 +1,3 @@
-require 'net/https'
-require 'open-uri'
-
 class ExistencesController < ApplicationController
   before_action :set_access, only: [:edit, :update]
 
@@ -29,9 +26,9 @@ class ExistencesController < ApplicationController
 
     respond_to do |format|
       if create_pixel(user, @existence.enter_time, existences) #Create Pixel
-        format.html { redirect_to user_path(@existence.user_id), notice: '更新しました。' }
+        format.html { redirect_to user_path(@existence.user_id), notice: '在籍情報を更新しました。' }
       else
-        flash[:alert] = pixel_result
+        flash[:alert] = "在籍情報の更新ができませんでした。再度やり直してください"
         format.html { render :edit }
       end
     end
