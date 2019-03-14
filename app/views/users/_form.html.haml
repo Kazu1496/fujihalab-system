@@ -4,8 +4,13 @@
 
 = form_for @user do |f|
   .field
+    = f.label :nickname
+    = f.text_field :nickname, value: @user.nickname
+
+  .field
     = f.label :image
-    = f.file_field :image
+    = f.file_field :image, id: "post_img"
+    = image_tag(user_image_exist(@user), size: '100x100', id: "preview_img")
 
   .field
     = f.label :password

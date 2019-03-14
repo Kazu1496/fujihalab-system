@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_14_032632) do
+ActiveRecord::Schema.define(version: 2019_03_14_150306) do
 
   create_table "existences", force: :cascade do |t|
     t.integer "user_id"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 2019_03_14_032632) do
     t.string "image"
     t.string "pixela_token"
     t.string "password_digest"
+    t.string "nickname"
+    t.string "remember_token"
   end
 
 end

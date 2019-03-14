@@ -1,6 +1,8 @@
 require 'securerandom'
 
 class Api::V1::ExistencesController < ApplicationController
+  skip_before_action :require_sign_in!
+  
   protect_from_forgery :except => [:post]
 
   def post
