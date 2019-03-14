@@ -18,6 +18,7 @@ gem 'rack-attack', '~> 5.0.1'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'bcrypt'
+gem "jquery-rails"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

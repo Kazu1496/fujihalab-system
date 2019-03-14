@@ -11,6 +11,10 @@ class ImageUploader < CarrierWave::Uploader::Base
     process resize_to_fill: [800, 800, "Center"]
   end
 
+  def extension_white_list
+    %w(jpg jpeg png)
+  end
+
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
