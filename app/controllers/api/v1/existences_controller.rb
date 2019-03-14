@@ -1,15 +1,14 @@
-require 'net/https'
-require 'open-uri'
 require 'securerandom'
 
-class Api::V1::ExistenceController < ApplicationController
+class Api::V1::ExistencesController < ApplicationController
   protect_from_forgery :except => [:post]
 
   def post
     # post test
     # ```shell
-    # curl -X POST -H "Content-Type: application/json" -d '{"name": "Buri", "status": true}' http://0.0.0.0:3000/api/v1/existence
+    # curl -X POST -H "Content-Type: application/json" -d '{"name": "Buri", "password": "secure" "status": true}' http://0.0.0.0:3000/api/v1/existences
     # ```
+
     now_time = Time.now()
     name = params[:name].downcase
     password = params[:password]
@@ -67,48 +66,30 @@ class Api::V1::ExistenceController < ApplicationController
 
       if user_result["isSuccess"] && graph_result["isSuccess"]
         user.save
+        render json: {status: 200, message: "User create successfully!"}
       else
         render json: {status: 400, message: "User create faild..."}
       end
     end
-
 
     if status
       existence = user.existences.order(:updated_at).create(user_id: user.id)
       user.update!(status: true)
       existence.update!(enter_time: now_time)
     else
-      existence = user.existences.order(enter_time: :desc).take
-      diff = if existence.enter_time
-               (now_time - Time.parse(existence.enter_time.to_s)) / 60
-             else
-               0
-             end
+      existence = user.existences.order(:updated_at).last
+      existences = Existence.where(
+        user_id: user.id,
+        enter_time: existence.enter_time.in_time_zone.all_day
+      )
 
-      total = diff + user.total
+      #delete_pixel
+      delete_pixel(user, now_time.strftime("%Y%m%d"))
 
-      # CreatePixel
-      picel_uri = URI.parse("https://pixe.la/v1/users/#{user.name}/graphs/access-graph")
-      picel_http = Net::HTTP.new(picel_uri.host, picel_uri.port)
-
-      picel_http.use_ssl = true
-      picel_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-      picel_post_params = {
-        date: now_time.strftime("%Y%m%d"),
-        quantity: "4"
-      }
-
-      picel_req = Net::HTTP::Post.new(picel_uri)
-      picel_req.body = picel_post_params.to_json
-      picel_req["X-USER-TOKEN"] = user.pixela_token
-
-      picel_res = picel_http.request(picel_req)
-      picel_result = JSON.parse(picel_res.body)
-
-      if picel_result["isSuccess"]
-        user.update!(status: false, total: total)
-        existence.update!(exit_time: now_time, stay_time: diff)
+      if create_pixel(user, now_time, existences) # CreatePixel
+        user.update!(status: false)
+        existence.update!(exit_time: now_time)
+        render json: {status: 200, message: "Pixel create successfully!"}
       else
         render json: {status: 400, message: "Pixel create faild..."}
       end
