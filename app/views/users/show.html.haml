@@ -1,22 +1,24 @@
+- provide(:title, "#{@user.name}の情報")
 %p#notice= notice
 
 %p
   %strong 名前:
   = @user.name
-  = image_tag(@user.image.retina.to_s, size: '100x100')
+  - image_url = @user.image.present? ? @user.image.retina.to_s : "no_image.png"
+  = image_tag(image_url, size: '100x100')
 
 %p
   %strong 在室状況:
-  = @user.status ? '在室中' : '退室中'
+  = @user.status == 1 ? '入室中' : '退室中'
 
 %p
-  %strong 総入室時間:
-  = @user.total.to_i / 60
+  %strong 総在室時間:
+  #{@total_time} 時間
 
 %p
   %strong 卒業まで:
-  = ( 500 - @user.total.to_i / 60 ) / 60
-  日
+  = 500 - @total_time
+  時間
 
 %p
   %strong プロフィール設定:
@@ -33,12 +35,14 @@
     %th 入室時間
     %th 退室時間
     %th 在室時間
+    %th 編集
   %tbody
-    - @user.existences.each do |existence|
+    - @user.existences.order_by_enter_at.each do |existence|
       %tr
         %td= existence.enter_time.strftime("%Y年%m月%d日")
-        %td= existence.enter_time.strftime("%H:%M")
+        %td= datetime_encorder(existence.enter_time)
         %td= datetime_encorder(existence.exit_time)
-        %td= stay_time(existence.enter_time, existence.exit_time)
+        %td= stay_time(existence)
+        %td= link_to "Edit", edit_user_existence_path(@user, existence.id)
 
-= link_to 'Back', users_path
+= link_to 'Back', root_path

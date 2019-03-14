@@ -1,17 +1,24 @@
-- provide(:title, 'Home')
+- provide(:title, 'トップページ')
 %p#notice= notice
 
 %table
   %thead
     %tr
       %th 氏名
-      %th 在室情報
-      %th 総入室時間 [時間]
+      %th 在室状況
+      %th 総在室時間
       %th 詳細情報
   %tbody
     - @users.each do |user|
       %tr
-        %td= user.name
+        %td
+          - image_url = user.image.present? ? user.image.retina.to_s : "no_image.png"
+          = image_tag(image_url, size: '50x50')
+          = user.name
         %td= user.status == 1 ? '入室中' : '退室中'
-        %td= user.total.to_i / 60
+        - total_time = 0
+        - Existence.where(user_id: user.id).each do |existence|
+          - stay_time = stay_time(existence)
+          - total_time += stay_time.to_i
+        %td #{total_time} 時間
         %td= link_to 'Show', user

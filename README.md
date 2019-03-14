@@ -20,7 +20,7 @@
 cloneして
 
 ```shell
-git clone https://github.com/2357gi/who_is_there.git 
+git clone https://github.com/2357gi/who_is_there.git
 ```
 
 Gemfileを適用して<br>
@@ -49,7 +49,7 @@ rails s
 試しに新しくデータをpostするときは
 
 ```shell
-curl -X POST -H "Content-Type: application/json" -d '{"name": "Ohgi", "status": true}' http://0.0.0.0:3000/api/v1/existence
+curl -X POST -H "Content-Type: application/json" -d '{"name": "Buri", "password": "secure", "status": true}' http://0.0.0.0:3000/api/v1/existences
 ```
 
 **研究室で動かすときにはコレができないようにAPIつくったり何らかの対策を講じる事！**

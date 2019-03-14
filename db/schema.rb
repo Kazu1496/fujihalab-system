@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_12_153344) do
+ActiveRecord::Schema.define(version: 2019_03_14_032632) do
 
   create_table "existences", force: :cascade do |t|
     t.integer "user_id"
     t.datetime "enter_time"
     t.datetime "exit_time"
-    t.integer "stay_time", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -24,7 +23,6 @@ ActiveRecord::Schema.define(version: 2019_03_12_153344) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.integer "status", default: 1
-    t.integer "total", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
