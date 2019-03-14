@@ -108,7 +108,7 @@ class Api::V1::ExistenceController < ApplicationController
 
       if picel_result["isSuccess"]
         user.update!(status: false, total: total)
-        existence.update!(exit_time: now_time, stay_time: diff)
+        existence.update!(exit_time: now_time)
       else
         render json: {status: 400, message: "Pixel create faild..."}
       end

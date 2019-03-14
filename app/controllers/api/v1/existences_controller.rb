@@ -1,5 +1,3 @@
-require 'net/https'
-require 'open-uri'
 require 'securerandom'
 
 class Api::V1::ExistencesController < ApplicationController
@@ -8,8 +6,9 @@ class Api::V1::ExistencesController < ApplicationController
   def post
     # post test
     # ```shell
-    # curl -X POST -H "Content-Type: application/json" -d '{"name": "Buri", "password": "secure" "status": true}' http://0.0.0.0:3000/api/v1/existence
+    # curl -X POST -H "Content-Type: application/json" -d '{"name": "Buri", "password": "secure" "status": true}' http://0.0.0.0:3000/api/v1/existences
     # ```
+
     now_time = Time.now()
     name = params[:name].downcase
     password = params[:password]
@@ -73,15 +72,15 @@ class Api::V1::ExistencesController < ApplicationController
       end
     end
 
-
     if status
       existence = user.existences.order(:updated_at).create(user_id: user.id)
       user.update!(status: true)
       existence.update!(enter_time: now_time)
     else
+      existence = user.existences.order(:updated_at).last
       existences = Existence.where(
         user_id: user.id,
-        enter_time: @existence.enter_time.in_time_zone.all_day
+        enter_time: existence.enter_time.in_time_zone.all_day
       )
 
       #delete_pixel
@@ -89,7 +88,7 @@ class Api::V1::ExistencesController < ApplicationController
 
       if create_pixel(user, now_time, existences) # CreatePixel
         user.update!(status: false)
-        existence.update!(exit_time: now_time, stay_time: diff)
+        existence.update!(exit_time: now_time)
         render json: {status: 200, message: "Pixel create successfully!"}
       else
         render json: {status: 400, message: "Pixel create faild..."}

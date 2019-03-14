@@ -1,7 +1,10 @@
+require 'net/https'
+require 'open-uri'
+
 class ApplicationController < ActionController::Base
   private
     def create_pixel(user, date, existences)
-      quantity = stay_time(existences)
+      quantity = total_time(existences)
 
       pixel_uri = URI.parse("https://pixe.la/v1/users/#{user.name}/graphs/access-graph")
       pixel_http = Net::HTTP.new(pixel_uri.host, pixel_uri.port)
@@ -38,25 +41,15 @@ class ApplicationController < ActionController::Base
       delete_pixel_result = JSON.parse(delete_pixel_res.body)
     end
 
-    def stay_time(existences)
-      staytime = 0
+    def total_time(existences)
+      total_time = 0
       if existences.present?
         existences.each do |existence|
-          sec = (existence.exit_time.to_time - existence.enter_time.to_time).to_i
-          staytime += sec / 3600
+          if existence.exit_time.present?
+            sec = (existence.exit_time.to_time - existence.enter_time.to_time).to_i
+            total_time += sec / 3600
+          end
         end
-      end
-      staytime
-    end
-
-    def total_time(user, existences, date)
-      existences.each do |existence|
-        diff = if date.present?
-                 (date - Time.parse(existence.enter_time.to_s)) / 60
-               else
-                 (existence.exit_time - Time.parse(existence.enter_time.to_s)) / 60
-               end
-        total_time = diff + user.total
       end
       total_time
     end
