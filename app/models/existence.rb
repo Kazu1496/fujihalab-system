@@ -1,7 +1,5 @@
 class Existence < ApplicationRecord
   belongs_to :user
 
-  # def quantity_score(stay_time)
-  #   if stay_time 
-  # end
+  scope :order_by_enter_at, -> { order(enter_time: :desc) }
 end
