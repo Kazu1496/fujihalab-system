@@ -2,7 +2,7 @@ require 'securerandom'
 
 class Api::V1::ExistencesController < ApplicationController
   skip_before_action :require_sign_in!
-  
+
   protect_from_forgery :except => [:post]
 
   def post
@@ -75,6 +75,12 @@ class Api::V1::ExistencesController < ApplicationController
     end
 
     if status
+      # Slack出席通知処理
+      notifier = Slack::Notifier.new(ENV['SLACK_WEBHOOK_URL'])
+      notifier.ping(
+        "[#{Rails.env}] #{user.name}さんが出席しました。"
+      )
+      
       existence = user.existences.order(:updated_at).create(user_id: user.id)
       user.update!(status: true)
       existence.update!(enter_time: now_time)
@@ -89,6 +95,11 @@ class Api::V1::ExistencesController < ApplicationController
       delete_pixel(user, now_time.strftime("%Y%m%d"))
 
       if create_pixel(user, now_time, existences) # CreatePixel
+        # Slack退席通知処理
+        notifier = Slack::Notifier.new(ENV['SLACK_WEBHOOK_URL'])
+        notifier.ping(
+          "[#{Rails.env}] #{user.name}さんが退席しました。"
+        )
         user.update!(status: false)
         existence.update!(exit_time: now_time)
         render json: {status: 200, message: "Pixel create successfully!"}

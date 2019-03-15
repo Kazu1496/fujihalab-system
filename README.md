@@ -32,11 +32,10 @@ bundle install
 
 
 
-DBをマイグレーションして、dbの初期値を適用して、
+DBをマイグレーションして
 
 ```
 rails db:migrate
-rails db:seeds
 ```
 
 サーバーを立ち上げる
@@ -49,7 +48,7 @@ rails s
 試しに新しくデータをpostするときは
 
 ```shell
-curl -X POST -H "Content-Type: application/json" -d '{"name": "Buri", "password": "secure", "status": true}' http://0.0.0.0:3000/api/v1/existences
+curl -X POST -H "Content-Type: application/json" -d '{"name": "username", "password": "password", "status": true}' http://0.0.0.0:3000/api/v1/existences
 ```
 
 **研究室で動かすときにはコレができないようにAPIつくったり何らかの対策を講じる事！**
