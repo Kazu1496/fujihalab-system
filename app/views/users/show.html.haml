@@ -44,7 +44,7 @@
         %td= datetime_encorder(existence.enter_time)
         %td= datetime_encorder(existence.exit_time)
         %td= stay_time(existence)
-        - if @current_user == @user
+        - if @current_user == @user && existence.enter_time.present? && existence.exit_time.present?
           %td= link_to "Edit", edit_user_existence_path(@user, existence.id)
 
 = link_to 'Back', root_path
