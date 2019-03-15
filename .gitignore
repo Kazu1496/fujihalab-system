@@ -8,6 +8,8 @@
 .idea/
 # Ignore bundler config.
 /.bundle
+# Ignore bundler gems.
+vendor/bundle
 
 # Ignore env file
 .env

@@ -30,8 +30,8 @@ class ApplicationController < ActionController::Base
   end
 
   private
-    def create_pixel(user, date, existences)
-      quantity = total_time(existences) > 1 ? total_time(existences) : 1
+    def create_pixel(user, date, total_time)
+      quantity = total_time > 1 ? total_time : 1
 
       pixel_uri = URI.parse("https://pixe.la/v1/users/#{user.name}/graphs/access-graph")
       pixel_http = Net::HTTP.new(pixel_uri.host, pixel_uri.port)

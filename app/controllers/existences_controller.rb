@@ -17,15 +17,14 @@ class ExistencesController < ApplicationController
       exit_time: exit_time
     )
 
-    if @existence.saved_change_to_exit_time?
-      user.update(status: false)
-    end
+    total_time = total_time(Existence.where(user_id: user.id))
+    user.update!(total_time: total_time)
 
     #delete_pixel
     delete_pixel(user, @existence.enter_time.strftime("%Y%m%d"))
 
     respond_to do |format|
-      if create_pixel(user, @existence.enter_time, existences) #Create Pixel
+      if create_pixel(user, @existence.enter_time, total_time) #Create Pixel
         format.html { redirect_to user_path(@existence.user_id), notice: '在籍情報を更新しました。' }
       else
         flash[:alert] = "在籍情報の更新ができませんでした。再度やり直してください"
