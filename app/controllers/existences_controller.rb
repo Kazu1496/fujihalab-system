@@ -12,10 +12,15 @@ class ExistencesController < ApplicationController
     enter_time = update_time(@existence.enter_time, params[:existence][:enter_time].to_time)
     exit_time = update_time(@existence.exit_time, params[:existence][:exit_time].to_time)
 
-    @existence.update(
-      enter_time: enter_time,
-      exit_time: exit_time
-    )
+    if update_condition(@existence, params[:existence][:enter_time].to_time, params[:existence][:exit_time].to_time)
+      @existence.update(
+        enter_time: enter_time,
+        exit_time: exit_time
+      )
+    else
+      flash[:alert] = "無効な値のため、在籍情報の更新ができませんでした。再度やり直してください"
+      redirect_to edit_user_existence_path(user.id, @existence.id) and return
+    end
 
     total_time = total_time(Existence.where(user_id: user.id))
     user.update!(total_time: total_time)
@@ -36,5 +41,26 @@ class ExistencesController < ApplicationController
   private
     def set_access
       @existence = Existence.find_by(id: params[:id])
+    end
+
+    # TODO さすがにどうにかしたい
+    def update_condition(existence, enter_time, exit_time)
+      if existence.next.present? && existence.previous.present? && enter_time <= exit_time
+        if exit_time <= existence.next.enter_time && existence.previous.exit_time <= enter_time
+          true
+        end
+      elsif existence.next.present?
+        if exit_time <= existence.next.enter_time && enter_time <= exit_time
+          true
+        end
+      elsif existence.previous.present?
+        if existence.previous.exit_time <= enter_time && enter_time <= exit_time
+          true
+        end
+      elsif enter_time <= exit_time
+        true
+      else
+        false
+      end
     end
 end
