@@ -1,0 +1,14 @@
+- provide(:title, 'ログイン')
+- if flash[:alert].present?
+  %p= flash[:alert]
+
+= form_for :session, url: login_path do |f|
+  .field
+    = f.label :name
+    = f.text_field :name
+
+  .field
+    = f.label :password
+    = f.password_field :password
+
+  = f.submit 'ログイン'

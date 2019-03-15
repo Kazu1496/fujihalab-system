@@ -2,9 +2,36 @@ require 'net/https'
 require 'open-uri'
 
 class ApplicationController < ActionController::Base
+  before_action :current_user
+  before_action :require_sign_in!
+  helper_method :signed_in?
+
+  protect_from_forgery with: :exception
+
+  def current_user
+    remember_token = User.encrypt(cookies[:user_remember_token])
+    @current_user ||= User.find_by(remember_token: remember_token)
+  end
+
+  def sign_in(user)
+    remember_token = User.new_remember_token
+    cookies.permanent[:user_remember_token] = remember_token
+    user.update!(remember_token: User.encrypt(remember_token))
+    @current_user = user
+  end
+
+  def sign_out
+    @current_user = nil
+    cookies.delete(:user_remember_token)
+  end
+
+  def signed_in?
+    @current_user.present?
+  end
+
   private
     def create_pixel(user, date, existences)
-      quantity = total_time(existences)
+      quantity = total_time(existences) > 1 ? total_time(existences) : 1
 
       pixel_uri = URI.parse("https://pixe.la/v1/users/#{user.name}/graphs/access-graph")
       pixel_http = Net::HTTP.new(pixel_uri.host, pixel_uri.port)
@@ -59,6 +86,10 @@ class ApplicationController < ActionController::Base
       datetime = updated_time.strftime("%H%M")
       updated_date = date + datetime
       updated_date.to_time
+    end
+
+    def require_sign_in!
+      redirect_to login_path unless signed_in?
     end
 end
 

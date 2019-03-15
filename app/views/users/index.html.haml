@@ -1,6 +1,7 @@
-- provide(:title, 'トップページ')
+- provide(:title, '出席状況')
 %p#notice= notice
 
+%h1 出席状況 in FujihaLab
 %table
   %thead
     %tr
@@ -12,9 +13,8 @@
     - @users.each do |user|
       %tr
         %td
-          - image_url = user.image.present? ? user.image.retina.to_s : "no_image.png"
-          = image_tag(image_url, size: '50x50')
-          = user.name
+          = image_tag user_image_exist(user), size: '50x50'
+          = name = user.nickname.present? ? user.nickname : user.name
         %td= user.status == 1 ? '入室中' : '退室中'
         - total_time = 0
         - Existence.where(user_id: user.id).each do |existence|
