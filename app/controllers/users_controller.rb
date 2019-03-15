@@ -5,11 +5,13 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def show
-    @total_time = total_time(Existence.where(user_id: @user.id))
-  end
+  def show; end
 
   def edit; end
+
+  def ranking
+    @users = User.all.order(total_time: :desc)
+  end
 
   def update
     respond_to do |format|
