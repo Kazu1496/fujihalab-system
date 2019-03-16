@@ -70,7 +70,7 @@ class Api::V1::ExistencesController < ApplicationController
         user.save
         render json: {status: 200, message: "User create successfully!"}
       else
-        render json: {status: 400, message: "User create faild..."}
+        render json: {user_result: user_result, graph_result: graph_result} and return
       end
     end
 
@@ -85,6 +85,7 @@ class Api::V1::ExistencesController < ApplicationController
       user.update!(status: true)
       existence.update!(enter_time: now_time)
     else
+      total_time = total_time(Existence.where(user_id: user.id))
       existence = user.existences.order(:created_at).last
       existences = Existence.where(
         user_id: user.id,
@@ -94,13 +95,13 @@ class Api::V1::ExistencesController < ApplicationController
       #delete_pixel
       delete_pixel(user, now_time.strftime("%Y%m%d"))
 
-      if create_pixel(user, now_time, existences) # CreatePixel
+      if create_pixel(user, now_time, total_time) # CreatePixel
         # Slack退席通知処理
         notifier = Slack::Notifier.new(ENV['SLACK_WEBHOOK_URL'])
         notifier.ping(
           "[#{Rails.env}] #{user.name}さんが退席しました。"
         )
-        user.update!(status: false)
+        user.update!(status: false, total_time: total_time)
         existence.update!(exit_time: now_time)
         render json: {status: 200, message: "Pixel create successfully!"}
       else

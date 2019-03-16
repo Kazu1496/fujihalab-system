@@ -1,6 +1,28 @@
+- provide(:title, "#{@user.name}のプロフィール設定")
+- if flash[:alert].present?
+  %p= flash[:alert]
+
 %h1 #{@user.name}の詳細変更
 
-= render 'form', user: @user
+= form_for @user do |f|
+  .field
+    = f.label :nickname
+    = f.text_field :nickname, value: @user.nickname
 
-= link_to 'Show', @user
-= link_to 'Back', users_path
+  .field
+    = f.label :image
+    = f.file_field :image, id: "post_img"
+    = image_tag(user_image_exist(@user), size: '100x100', id: "preview_img")
+
+  .field
+    = f.label :password
+    = f.password_field :password
+
+  .field
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+
+  .actions
+    = f.submit
+
+= link_to 'Back', user_path(@user)
