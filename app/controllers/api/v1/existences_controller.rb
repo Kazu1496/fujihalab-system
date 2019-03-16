@@ -70,7 +70,7 @@ class Api::V1::ExistencesController < ApplicationController
         user.save
         render json: {status: 200, message: "User create successfully!"}
       else
-        render json: {status: 400, message: "User create faild..."}
+        render json: {user_result: user_result, graph_result: graph_result} and return
       end
     end
 
