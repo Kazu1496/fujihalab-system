@@ -18,7 +18,7 @@ class ExistencesController < ApplicationController
         exit_time: exit_time
       )
     else
-      flash[:alert] = "無効な値のため、在籍情報の更新ができませんでした。再度やり直してください"
+      flash[:alert] = "無効な値が入力されたため、在籍情報の更新ができませんでした。再度やり直してください"
       redirect_to edit_user_existence_path(user.id, @existence.id) and return
     end
 
@@ -45,22 +45,18 @@ class ExistencesController < ApplicationController
 
     # TODO さすがにどうにかしたい
     def update_condition(existence, enter_time, exit_time)
-      if existence.next.present? && existence.previous.present? && enter_time <= exit_time
-        if exit_time <= existence.next.enter_time && existence.previous.exit_time <= enter_time
-          true
+      if enter_time <= exit_time && exit_time < Time.now
+        if existence.next.present? && existence.previous.present?
+          result = (exit_time <= existence.next.enter_time && existence.previous.exit_time <= enter_time) ? true : false
+        elsif existence.next.present? && enter_time
+          result = (exit_time <= existence.next.enter_time) ? true : false
+        elsif existence.previous.present?
+          result = (existence.previous.exit_time <= enter_time) ? true : false
+        else
+          result = (enter_time <= exit_time && exit_time < Time.now) ? true : false
         end
-      elsif existence.next.present?
-        if exit_time <= existence.next.enter_time && enter_time <= exit_time
-          true
-        end
-      elsif existence.previous.present?
-        if existence.previous.exit_time <= enter_time && enter_time <= exit_time
-          true
-        end
-      elsif enter_time <= exit_time
-        true
       else
-        false
+        result = false
       end
     end
 end
