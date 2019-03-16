@@ -1,0 +1,20 @@
+- provide(:title, 'ランキング')
+
+%h1 在室時間ランキング
+%table
+  %thead
+    %tr
+      %th 氏名
+      %th 在室状況
+      %th 総在室時間
+      %th 詳細情報
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td
+          - image_url = user.image.present? ? user.image.retina.to_s : "no_image.png"
+          = image_tag(image_url, size: '50x50')
+          = name = user.nickname.present? ? user.nickname : user.name
+        %td= user.status == 1 ? '入室中' : '退室中'
+        %td #{user.total_time} 時間
+        %td= link_to 'Show', user

@@ -10,23 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_01_134322) do
+ActiveRecord::Schema.define(version: 2019_03_15_164230) do
 
   create_table "existences", force: :cascade do |t|
-    t.integer "name_id"
+    t.integer "user_id"
     t.datetime "enter_time"
     t.datetime "exit_time"
-    t.integer "stay_time", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.boolean "status", default: false
-    t.integer "total", default: 0
+    t.integer "status", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image"
+    t.string "pixela_token"
+    t.string "password_digest"
+    t.string "nickname"
+    t.string "remember_token"
+    t.integer "total_time", default: 0
   end
 
 end
