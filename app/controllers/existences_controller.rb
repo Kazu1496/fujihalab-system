@@ -53,7 +53,7 @@ class ExistencesController < ApplicationController
         elsif existence.previous.present?
           result = (existence.previous.exit_time <= enter_time) ? true : false
         else
-          result = (enter_time <= exit_time && exit_time < Time.now) ? true : false
+          result = true
         end
       else
         result = false
