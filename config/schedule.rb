@@ -2,10 +2,11 @@
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
 # http://en.wikipedia.org/wiki/Cron
+require File.expand_path(File.dirname(__FILE__) + "/environment")
 
-set :output, 'log/crontab.log'
-ENV['RAILS_ENV'] ||= 'development'
-set :environment, ENV['RAILS_ENV']
+rails_env = ENV['RAILS_ENV'] ||= 'development'
+set :environment, rails_env
+set :output, "#{Rails.root}/log/crontab.log"
 
 every 1.day, at: "11:59 pm" do
   rake "attendance:attendance"
