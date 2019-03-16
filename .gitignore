@@ -8,6 +8,11 @@
 .idea/
 # Ignore bundler config.
 /.bundle
+# Ignore bundler gems.
+vendor/bundle
+
+# Ignore env file
+.env
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -22,6 +27,9 @@
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
+
+# Ignore CarrierWave upload folder files.
+public/uploads
 
 /node_modules
 /yarn-error.log
