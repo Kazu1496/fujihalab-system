@@ -16,7 +16,7 @@ module Attendance extend self
 
       user.update!(status: true)
       next_existence = user.existences.order(:created_at).create(user_id: user.id)
-      next_existence.update!(enter_time: now_time + 60)
+      next_existence.update!(enter_time: now_time)
     end
   end
 end
