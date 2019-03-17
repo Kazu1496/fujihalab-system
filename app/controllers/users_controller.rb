@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.all
+    @users = User.where('status = ?', 1)
   end
 
   def show; end
@@ -11,6 +11,10 @@ class UsersController < ApplicationController
 
   def ranking
     @users = User.all.order(total_time: :desc)
+  end
+
+  def member
+    @users = User.all
   end
 
   def update

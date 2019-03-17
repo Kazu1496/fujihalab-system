@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 2019_03_17_051854) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.boolean "status", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 1
     t.string "picture"
     t.string "pixela_token"
     t.string "password_digest"
