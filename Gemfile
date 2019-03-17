@@ -17,6 +17,7 @@ gem 'materialize-sass'
 gem 'rack-attack', '~> 5.0.1'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'cloudinary'
 gem 'bcrypt'
 gem "jquery-rails"
 gem 'slack-notifier'
