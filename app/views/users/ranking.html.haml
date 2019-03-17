@@ -12,8 +12,7 @@
     - @users.each do |user|
       %tr
         %td
-          - image_url = user.image.present? ? user.image.retina.to_s : "no_image.png"
-          = image_tag(image_url, size: '50x50')
+          = user_image_tag(user, "")
           = name = user.nickname.present? ? user.nickname : user.name
         %td= user.status == 1 ? '入室中' : '退室中'
         %td #{user.total_time} 時間
