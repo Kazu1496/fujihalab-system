@@ -104,6 +104,8 @@ class Api::V1::ExistencesController < ApplicationController
           render json: {status: 400, message: "Pixel create faild..."}
         end
       end
+    else
+      render json: {status: 400, message: "その端末からのアクセスは許可されていません。"} and return
     end
   end
 
