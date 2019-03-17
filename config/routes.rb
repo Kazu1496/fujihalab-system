@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   delete  'logout',  to: 'sessions#destroy'
 
   get 'ranking', to: 'users#ranking'
+  get 'member', to: 'users#member'
 
   resources :users, only: [:index, :show, :edit, :update] do
     resources :existences, only: [:edit, :update]
