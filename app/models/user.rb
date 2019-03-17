@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   validates :name, uniqueness: true
 
-  mount_uploader :image, ImageUploader
+  mount_uploader :picture, PictureUploader
 
   def self.new_remember_token
     SecureRandom.urlsafe_base64
