@@ -10,10 +10,9 @@
     = f.text_field :nickname, value: @user.nickname
 
   .field
-    = f.label :image
-    = f.file_field :image, id: "post_img"
-    = image_tag(user_image_exist(@user), size: '100x100', id: "preview_img")
-
+    = f.label :picture
+    = f.file_field :picture, id: "post_img"
+    = user_image_tag(@user, "preview_img")
   .field
     = f.label :password
     = f.password_field :password
