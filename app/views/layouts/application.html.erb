@@ -12,13 +12,15 @@
   <body>
   <header class="nav nav-wapper">
     <nav>
-      <%= link_to "出席状況", root_path %>
-      <%= link_to "ランキング", ranking_path%>
-      <%= link_to "メンバーリスト", member_path%>
-      <%= link_to "ログアウト", logout_path, method: :delete %>
-      <%= link_to user_path(@current_user) do %>
-        <%= user_name(@current_user) %>
-        <%= user_image_tag(@current_user, '', 30, 30) %>
+      <% if @current_user.present? %>
+        <%= link_to "出席状況", root_path %>
+        <%= link_to "ランキング", ranking_path%>
+        <%= link_to "メンバーリスト", member_path%>
+        <%= link_to "ログアウト", logout_path, method: :delete %>
+        <%= link_to user_path(@current_user) do %>
+          <%= user_name(@current_user) %>
+          <%= user_image_tag(@current_user, '', 30, 30) %>
+        <% end %>
       <% end %>
     </nav>
   </header>
