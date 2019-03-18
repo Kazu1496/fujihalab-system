@@ -82,9 +82,14 @@ class ApplicationController < ActionController::Base
 
   private
     def update_time(current_time, updated_time)
-      date = current_time.strftime("%Y%m%d")
-      datetime = updated_time.strftime("%H%M")
-      updated_date = date + datetime
+      if current_time.present?
+        date = current_time.strftime("%Y%m%d")
+        datetime = updated_time.strftime("%H%M")
+        updated_date = date + datetime
+      else
+        datetime = updated_time.strftime("%Y%m%d%H%M")
+        updated_date = datetime
+      end
       updated_date.to_time
     end
 
