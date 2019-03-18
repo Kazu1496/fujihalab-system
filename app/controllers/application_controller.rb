@@ -29,58 +29,58 @@ class ApplicationController < ActionController::Base
     @current_user.present?
   end
 
-  private
-    def create_pixel(user, date, total_time)
-      quantity = total_time > 1 ? total_time : 1
-
-      pixel_uri = URI.parse("https://pixe.la/v1/users/#{user.name}/graphs/access-graph")
-      pixel_http = Net::HTTP.new(pixel_uri.host, pixel_uri.port)
-
-      pixel_http.use_ssl = true
-      pixel_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-      pixel_post_params = {
-        date: date.strftime("%Y%m%d"),
-        quantity: quantity.to_s
-      }
-
-      pixel_req = Net::HTTP::Post.new(pixel_uri)
-      pixel_req.body = pixel_post_params.to_json
-      pixel_req["X-USER-TOKEN"] = user.pixela_token
-
-      pixel_res = pixel_http.request(pixel_req)
-      pixel_result = JSON.parse(pixel_res.body)
-
-      pixel_result["isSuccess"]
-    end
-
-    def delete_pixel(user, date)
-      delete_pixel_uri = URI.parse("https://pixe.la/v1/users/#{user.name}/graphs/access-graph/#{date}")
-      delete_pixel_http = Net::HTTP.new(delete_pixel_uri.host, delete_pixel_uri.port)
-
-      delete_pixel_http.use_ssl = true
-      delete_pixel_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-      delete_pixel_req = Net::HTTP::Delete.new(delete_pixel_uri)
-      delete_pixel_req["X-USER-TOKEN"] = user.pixela_token
-
-      delete_pixel_res = delete_pixel_http.request(delete_pixel_req)
-      delete_pixel_result = JSON.parse(delete_pixel_res.body)
-    end
-
-    def total_time(existences)
-      total_time = 0
-      if existences.present?
-        existences.each do |existence|
-          if existence.exit_time.present?
-            sec = (existence.exit_time.to_time - existence.enter_time.to_time).to_i
-            total_time += sec / 3600
-          end
+  def total_time(existences)
+    total_time = 0
+    if existences.present?
+      existences.each do |existence|
+        if existence.exit_time.present?
+          sec = (existence.exit_time.to_time - existence.enter_time.to_time).to_i
+          total_time += sec / 3600
         end
       end
-      total_time
     end
+    total_time
+  end
 
+  def create_pixel(user, date, total_time)
+    quantity = total_time > 1 ? total_time : 1
+
+    pixel_uri = URI.parse("https://pixe.la/v1/users/#{user.name}/graphs/access-graph")
+    pixel_http = Net::HTTP.new(pixel_uri.host, pixel_uri.port)
+
+    pixel_http.use_ssl = true
+    pixel_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    pixel_post_params = {
+      date: date.strftime("%Y%m%d"),
+      quantity: quantity.to_s
+    }
+
+    pixel_req = Net::HTTP::Post.new(pixel_uri)
+    pixel_req.body = pixel_post_params.to_json
+    pixel_req["X-USER-TOKEN"] = user.pixela_token
+
+    pixel_res = pixel_http.request(pixel_req)
+    pixel_result = JSON.parse(pixel_res.body)
+
+    pixel_result["isSuccess"]
+  end
+
+  def delete_pixel(user, date)
+    delete_pixel_uri = URI.parse("https://pixe.la/v1/users/#{user.name}/graphs/access-graph/#{date}")
+    delete_pixel_http = Net::HTTP.new(delete_pixel_uri.host, delete_pixel_uri.port)
+
+    delete_pixel_http.use_ssl = true
+    delete_pixel_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    delete_pixel_req = Net::HTTP::Delete.new(delete_pixel_uri)
+    delete_pixel_req["X-USER-TOKEN"] = user.pixela_token
+
+    delete_pixel_res = delete_pixel_http.request(delete_pixel_req)
+    delete_pixel_result = JSON.parse(delete_pixel_res.body)
+  end
+
+  private
     def update_time(current_time, updated_time)
       date = current_time.strftime("%Y%m%d")
       datetime = updated_time.strftime("%H%M")
