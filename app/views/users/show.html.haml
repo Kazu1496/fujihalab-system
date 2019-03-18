@@ -8,7 +8,7 @@
 
 %p
   %strong 在室状況:
-  = @user.status == 1 ? '入室中' : '退室中'
+  = @user.status? ? '入室中' : '退室中'
 
 %p
   %strong 総在室時間:
