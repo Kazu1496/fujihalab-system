@@ -1,8 +1,8 @@
-- provide(:title, "#{@user.name}のプロフィール設定")
+- provide(:title, "#{user_name(@user)}のプロフィール設定")
 - if flash[:alert].present?
   %p= flash[:alert]
 
-%h1 #{@user.name}の詳細変更
+%h1 #{user_name(@user)}の詳細変更
 
 = form_for @user do |f|
   .field
@@ -12,7 +12,7 @@
   .field
     = f.label :picture
     = f.file_field :picture, id: "post_img"
-    = user_image_tag(@user, "preview_img")
+    = user_image_tag(@user, "preview_img", 80, 80)
   .field
     = f.label :password
     = f.password_field :password

@@ -3,8 +3,8 @@
 
 %p
   %strong 名前:
-  = name = @user.nickname.present? ? @user.nickname : @user.name
-  = user_image_tag(@user, "")
+  = user_name(@user)
+  = user_image_tag(@user, "", 80, 80)
 
 %p
   %strong 在室状況:
