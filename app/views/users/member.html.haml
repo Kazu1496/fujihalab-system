@@ -13,8 +13,8 @@
     - @users.each do |user|
       %tr
         %td
-          = user_image_tag(user, "")
-          = name = user.nickname.present? ? user.nickname : user.name
+          = user_image_tag(user, "", 80, 80)
+          = user_name(user)
         %td= user.status? ? '入室中' : '退室中'
         %td #{user.total_time} 時間
         %td= link_to 'Show', user

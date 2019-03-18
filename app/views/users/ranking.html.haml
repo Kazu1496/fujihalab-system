@@ -9,11 +9,12 @@
       %th 総在室時間
       %th 詳細情報
   %tbody
-    - @users.each do |user|
+    - @users.each_with_index do |user, index|
       %tr
         %td
-          = user_image_tag(user, "")
-          = name = user.nickname.present? ? user.nickname : user.name
+          = index + 1
+          = user_image_tag(user, "", 80, 80)
+          = user_name(user)
         %td= user.status? ? '入室中' : '退室中'
         %td #{user.total_time} 時間
         %td= link_to 'Show', user
