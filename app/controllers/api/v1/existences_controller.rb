@@ -112,7 +112,7 @@ class Api::V1::ExistencesController < ApplicationController
 
   private
     def white_list(ip)
-      if ENV['RAILS_ENV'] == 'production'
+      if Rails.env.production
         return true if ENV["LAB_IP_ADDRESS"] == ip
         false
       else
