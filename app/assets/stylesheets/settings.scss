@@ -1,0 +1,26 @@
+$first_color: #FFC107;
+$second_color: #FFA000;
+$third_color: #26C6DA;
+
+$primary_white_text: rgba(#FFF,1);
+$secondary_white_text: rgba(#FFF,0.87);
+$hint_white_text: rgba(#FFF,0.54);
+$divider_white_text: rgba(#FFF,0.38);
+
+$primary_black_text: rgba(#222,1);
+$secondary_black_text: rgba(#222,0.87);
+$hint_black_text: rgba(#222,0.54);
+$divider_black_text: rgba(#222,0.38);
+
+@mixin shadow{
+  box-shadow: 0px 4px 3px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0px 4px 3px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 4px 3px rgba(0,0,0,0.3);
+}
+
+body{
+  color: $primary_black_text;
+  background-color: #F7F7F7;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Hiragino Kaku Gothic ProN, "ヒラギノ角ゴ ProN W3", Arial, "メイリオ", Meiryo, sans-serif;
+  word-wrap: break-word;
+}
