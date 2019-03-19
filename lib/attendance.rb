@@ -12,7 +12,7 @@ module Attendance extend self
       controller.delete_pixel(user, now_time.strftime("%Y%m%d"))
       if controller.create_pixel(user, now_time, total_time)
         user.update!(status: false)
-        latest_existence.update!(exit_time: now_time - 61)
+        latest_existence.update!(exit_time: now_time - 60)
       end
 
       user.update!(
@@ -20,7 +20,7 @@ module Attendance extend self
         total_time: total_time
       )
       next_existence = user.existences.order(:created_at).create(user_id: user.id)
-      next_existence.update!(enter_time: now_time - 60)
+      next_existence.update!(enter_time: now_time)
     end
   end
 end
