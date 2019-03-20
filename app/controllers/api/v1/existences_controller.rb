@@ -77,11 +77,12 @@ class Api::V1::ExistencesController < ApplicationController
       render json: {status: 400, message: "既に出席もしくは退席中のため失敗しました。"} and return
     end
 
+    username = user.nickname.present? ? user.nickname : user.name
     if status
       # Slack出席通知処理
       notifier = Slack::Notifier.new(ENV['SLACK_WEBHOOK_URL'])
       notifier.ping(
-        "[#{Rails.env}] #{user.name}さんが出席しました。"
+        "[#{Rails.env}] #{username}さんが出席しました。"
       )
 
       existence = user.existences.order(:created_at).create(user_id: user.id)
@@ -99,7 +100,7 @@ class Api::V1::ExistencesController < ApplicationController
         # Slack退席通知処理
         notifier = Slack::Notifier.new(ENV['SLACK_WEBHOOK_URL'])
         notifier.ping(
-          "[#{Rails.env}] #{user.name}さんが退席しました。"
+          "[#{Rails.env}] #{username}さんが退席しました。"
         )
         user.update!(status: false, total_time: total_time)
         existence.update!(exit_time: update_time(nil, now_time))
