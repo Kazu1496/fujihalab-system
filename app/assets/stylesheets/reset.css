@@ -20,7 +20,7 @@ time, mark, audio, video {
   font-weight: normal;
   font-size: 100%;
   vertical-align: baseline;
-  font-family: 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Hiragino Kaku Gothic ProN, "ヒラギノ角ゴ ProN W3", Arial, "メイリオ", Meiryo, sans-serif;
 }
 
 article, aside, details, figcaption, figure,
@@ -52,7 +52,7 @@ ol, ul{
 }
 
 table{
-  border-collapse: collapse; 
+  border-collapse: collapse;
   border-spacing:0;
 }
 
@@ -65,7 +65,7 @@ a:focus {
 }
 
 .clearfix:after {
-  content: "."; 
+  content: ".";
   display: block;
   clear: both;
   height: 0;

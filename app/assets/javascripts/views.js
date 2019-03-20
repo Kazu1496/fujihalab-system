@@ -29,7 +29,7 @@ window.onload = function(){
     };
   };
 
-  // プロフォール画像即時プレビュー用
+  // プロフィール画像即時プレビュー用
   const postImage = document.getElementById('post_img');
   const previewImage = document.getElementById('preview_img');
 
