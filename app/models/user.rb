@@ -2,7 +2,8 @@ class User < ApplicationRecord
   has_many :existences, dependent: :destroy
   has_secure_password validations: true
 
-  validates :name, uniqueness: true
+  validates :name, :address, uniqueness: true
+  validates :name, :address, :password_digest, presence: true
 
   mount_uploader :picture, PictureUploader
 
