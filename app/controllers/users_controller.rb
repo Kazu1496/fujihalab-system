@@ -29,50 +29,52 @@ class UsersController < ApplicationController
     now_time = Time.now()
     username = @user.nickname.present? ? @user.nickname : @user.name
 
-    # CreateUser
-    user_uri = URI.parse("https://pixe.la/v1/users/")
-    user_http = Net::HTTP.new(user_uri.host, user_uri.port)
+    begin
+      # CreateUser
+      user_uri = URI.parse("https://pixe.la/v1/users/")
+      user_http = Net::HTTP.new(user_uri.host, user_uri.port)
 
-    user_http.use_ssl = true
-    user_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      user_http.use_ssl = true
+      user_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-    user_post_params = {
-      token: @user.pixela_token,
-      username: @user.name,
-      agreeTermsOfService: "yes",
-      notMinor: "yes"
-    }
+      user_post_params = {
+        token: @user.pixela_token,
+        username: @user.name,
+        agreeTermsOfService: "yes",
+        notMinor: "yes"
+      }
 
-    user_req = Net::HTTP::Post.new(user_uri)
-    user_req.body = user_post_params.to_json
+      user_req = Net::HTTP::Post.new(user_uri)
+      user_req.body = user_post_params.to_json
 
-    user_res = user_http.request(user_req)
-    user_result = JSON.parse(user_res.body)
+      user_res = user_http.request(user_req)
+      user_result = JSON.parse(user_res.body)
 
-    # CreateGraph
-    graph_uri = URI.parse("https://pixe.la/v1/users/#{@user.name}/graphs")
-    graph_http = Net::HTTP.new(graph_uri.host, graph_uri.port)
+      # CreateGraph
+      graph_uri = URI.parse("https://pixe.la/v1/users/#{@user.name}/graphs")
+      graph_http = Net::HTTP.new(graph_uri.host, graph_uri.port)
 
-    graph_http.use_ssl = true
-    graph_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      graph_http.use_ssl = true
+      graph_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-    graph_post_params = {
-      id: "access-graph",
-      name: "#{@user.name}-graph",
-      unit: "hour",
-      type: "int",
-      color: "shibafu"
-    }
+      graph_post_params = {
+        id: "access-graph",
+        name: "#{@user.name}-graph",
+        unit: "hour",
+        type: "int",
+        color: "shibafu"
+      }
 
-    graph_req = Net::HTTP::Post.new(graph_uri)
-    graph_req.body = graph_post_params.to_json
-    graph_req["X-USER-TOKEN"] = @user.pixela_token
+      graph_req = Net::HTTP::Post.new(graph_uri)
+      graph_req.body = graph_post_params.to_json
+      graph_req["X-USER-TOKEN"] = @user.pixela_token
 
-    graph_res = graph_http.request(graph_req)
-    graph_result = JSON.parse(graph_res.body)
-
-    puts user_result["isSuccess"]
-    puts graph_result["isSuccess"]
+      graph_res = graph_http.request(graph_req)
+      graph_result = JSON.parse(graph_res.body)
+    rescue
+      flash[:alert] = "ユーザーIDには半角英数文字またはハイフン（-）のみ使用できます。"
+      render :new and return
+    end
 
     respond_to do |format|
       if @user.save && user_result["isSuccess"] && graph_result["isSuccess"]
@@ -81,7 +83,7 @@ class UsersController < ApplicationController
           "[#{Rails.env}] #{username}さんが出席しました。"
         )
 
-        existence = @user.existences.create(user_id: @user.id, enter_time: update_time(nil, now_time))
+        @user.existences.create!(user_id: @user.id, enter_time: update_time(nil, now_time))
 
         sign_in(@user)
         format.html { redirect_to @user, notice: 'ユーザー登録が完了しました。' }
