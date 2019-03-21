@@ -1,20 +1,52 @@
 - provide(:title, '出席状況')
 %p#notice= notice
 
-%h1 出席状況
-%table
-  %thead
-    %tr
-      %th 氏名
-      %th 在室状況
-      %th 総在室時間
-      %th 詳細情報
-  %tbody
+#index_container
+  %h1
+    %span 出席状況
+    In attendance
+  %ul
     - @users.each do |user|
-      %tr
-        %td
-          = user_image_tag(user, "", 80, 80)
+      %li
+        = user_image_tag(user, "", 80, 80)
+        .user_elements
           = user_name(user)
-        %td= user.status? ? '入室中' : '退室中'
-        %td #{user.total_time} 時間
-        %td= link_to 'Show', user
+          = link_to "javascript:void(0)", class: "show_card", data: {user: user.id} do
+            Show
+            = icon('fas','arrow-right')
+      - if from_sp?
+        .user_card{data: {user: user.id}}
+          %h2
+            = user_name(user)
+            の情報
+          .user_card_info
+            = user_image_tag(user, "", 80, 80)
+            %iframe{src: "https://pixe.la/v1/users/#{user.name}/graphs/access-graph", width:"280", height: "100"}
+            .user_card_info_elements
+              %p
+                ステータス :
+                = user.status? ? '在室中' : '退室中'
+              %p
+                総在室時間 :
+                = user.total_time
+                時間
+              %p
+                卒業まで :
+                = state = (0 > (450 - user.total_time)) ? "Congratulations on your graduation!" : "#{450 - user.total_time} 時間"
+              - if @current_user == user
+                %p
+                  プロフィール設定 :
+                  = link_to "Edit", edit_user_path(user)
+            = link_to user_path(user) do
+              もっとみる
+              = icon('fas','arrow-right')
+            = icon('fas', 'times', class: "card_dalete", data: {user: user.id})
+
+:javascript
+  const targetDom = document.getElementsByTagName('html');
+  for(var i = 0; i < targetDom.length; i++){
+    targetDom[i].style.overflow = "hidden";
+  };
+  document.addEventListener('touchmove', function(e){
+    e.preventDefault();
+  }, {passive: false});

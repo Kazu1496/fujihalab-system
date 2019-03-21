@@ -5,7 +5,7 @@ window.onload = function(){
   const drawerOverlay = document.getElementById('drawer_overlay');
   const openButton = document.getElementById('menu_opener');
 
-  if([openButton, drawerDeletebtn, drawerOverlay].indexOf(null) == -1){
+  if(openButton && drawerDeletebtn && drawerOverlay){
     openButton.addEventListener('click', function(){
       clicked.call(this);
     }, false);
@@ -17,7 +17,7 @@ window.onload = function(){
     drawerOverlay.addEventListener('click', function(){
       clicked.call(this);
     }, false);
-  }
+  };
 
   function clicked(){
     if(this === openButton){
@@ -33,19 +33,44 @@ window.onload = function(){
   const postImage = document.getElementById('post_img');
   const previewImage = document.getElementById('preview_img');
 
-  if(postImage !== null){
+  if(postImage){
     postImage.addEventListener('change', function(){
       readURL.call(this);
     }, false);
-  }
+  };
 
   function readURL() {
     if (this.files && this.files[0]) {
       var reader = new FileReader();
       reader.onload = function (e) {
         previewImage.setAttribute('src', e.target.result);
-      }
+      };
       reader.readAsDataURL(this.files[0]);
-    }
-  }
+    };
+  };
+
+  // カードアニメーション
+  const openCards = document.getElementsByClassName('user_card');
+  const cardOverlay = document.getElementById('card_overlay');
+
+  if(openCards[0]){
+    document.addEventListener('click', function(event){
+      if(event.target.classList.contains('show_card')){
+        toggleCard.call(openCards[event.target.dataset.user - 1]);
+      }
+      else if(event.target.classList.contains('card_dalete')){
+        toggleCard.call(openCards[event.target.dataset.user - 1]);
+      }
+    }, false);
+
+    function toggleCard(){
+      if(this.classList.contains('opened')){
+        this.classList.remove('opened');
+        cardOverlay.classList.add('open');
+      } else {
+        this.classList.add('opened');
+        cardOverlay.classList.remove('open');
+      };
+    };
+  };
 };

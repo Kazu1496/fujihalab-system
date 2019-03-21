@@ -1,8 +1,108 @@
 @import "settings";
 
 @media all and (min-width: 769px){
-
 }
 @media all and (max-width: 768px){
-
+  #index_container{
+    width: 100%;
+    height: 100vh;
+    margin: 20px 0;
+    h1{
+      font-size: 30px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      span{
+        display: block;
+        font-size: 16px;
+        font-weight: bold;
+      }
+    }
+    ul{
+      @include shadow(10px, 3px, 0.5);
+      overflow-y: scroll;
+      width: 80%;
+      max-height: 60vh;
+      border-radius: 10px;
+      background-color: #FFF;
+      margin: 0 auto;
+      padding: 10px;
+      li{
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        margin: 10px 0;
+        &:not(:last-child){
+          border-bottom: 1px solid $divider_black_text;
+        }
+        img{
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          margin-right: 20px;
+        }
+        .user_elements{
+          display: flex;
+          flex-direction: column;
+          color: $secondary_black_text;
+          font-weight: bold;
+        }
+      }
+      .user_card{
+        @include shadow(10px, 3px, 0.5);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 525px);
+        width: 280px;
+        height: 500px;
+        background-color: #FFF;
+        border-radius: 10px;
+        opacity: 0;
+        z-index: -1;
+        padding: 10px;
+        transition: all 0.3s ease 0s;
+        &.opened{
+          top: 50%;
+          opacity: 1;
+          z-index: 3;
+          transform: translate(-50%, -50%);
+        }
+        h2{
+          font-size: 20px;
+          font-weight: bold;
+          text-align: center;
+          margin-top: 20px;
+        }
+        &_info{
+          text-align: center;
+          img{
+            @include shadow(5px, 2px, 0.6);
+            border-radius: 50%;
+            margin-top: 20px;
+          }
+          &_elements{
+            @include shadow(5px, 2px, 0.6);
+            width: 220px;
+            border: 10px solid $second_color;
+            margin: 0px auto 20px;
+            p{
+              margin: 10px;
+            }
+          }
+          .card_dalete{
+            @include shadow(5px, 2px, 0.6);
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: $primary_white_text;
+            font-size: 20px;
+            border-radius: 50%;
+            background-color: $second_color;
+            padding: 15px;
+          }
+        }
+      }
+    }
+  }
 }
