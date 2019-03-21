@@ -1,5 +1,7 @@
 - provide(:title, '出席状況')
 %p#notice= notice
+- if flash[:alert].present?
+  %p= flash[:alert]
 
 #index_container
   %h1

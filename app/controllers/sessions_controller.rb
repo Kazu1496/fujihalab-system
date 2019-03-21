@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   skip_before_action :require_sign_in!, only: [:new, :create]
   before_action :set_user, only: [:create]
+  before_action :already_sign_in?, only: [:new]
 
   def new; end
 
@@ -20,7 +21,6 @@ class SessionsController < ApplicationController
   end
 
   private
-
     def set_user
       @user = User.find_by!(name: session_params[:name])
     rescue
