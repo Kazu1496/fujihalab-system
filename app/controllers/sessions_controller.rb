@@ -6,12 +6,14 @@ class SessionsController < ApplicationController
   def new; end
 
   def create
-    if @user.authenticate(session_params[:password])
-      sign_in(@user)
-      redirect_to root_path
-    else
-      flash.now[:alert] = "ログインできませんでした。ユーザー名またはメールアドレスを確認してください。"
-      render 'new'
+    respond_to do |format|
+      if @user.authenticate(session_params[:password])
+        sign_in(@user)
+        format.html { redirect_to root_path, notice: 'ログインに成功しました。' }
+      else
+        flash.now[:alert] = "ログインできませんでした。ユーザー名またはメールアドレスを確認してください。"
+        format.html { render :new }
+      end
     end
   end
 
