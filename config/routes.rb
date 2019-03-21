@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'ranking', to: 'users#ranking'
   get 'member', to: 'users#member'
 
-  resources :users, only: [:index, :show, :edit, :update] do
+  resources :users do
     resources :existences, only: [:edit, :update]
   end
 
