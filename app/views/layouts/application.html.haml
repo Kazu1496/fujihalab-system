@@ -11,33 +11,34 @@
 
   %head
   %body
-    - if from_sp?
-      %nav#header_elements_sp
-        = icon('fas', 'times', id: "drawer_dalete")
-        %h2 Menu
-        %ul
-          %li
-            = link_to user_path(@current_user) do
-              = user_image_tag(@current_user, '', 30, 30)
-              = user_name(@current_user)
-          %li
-            = link_to root_path do
-              = icon('fas', 'address-book')
-              %span 出席状況
-          %li
-            = link_to ranking_path do
-              = icon('fas', 'trophy')
-              %span ランキング
-          %li
-            = link_to member_path do
-              = icon('fas', 'users')
-              %span メンバーリスト
-          %li
-            = link_to logout_path, method: :delete do
-              = icon('fas', 'sign-out-alt')
-              %span ログアウト
     %div#drawer_overlay.open
     %div#card_overlay.open
-    = render "layouts/header"
+    - if @current_user.present?
+      - if from_sp?
+        %nav#header_elements_sp
+          = icon('fas', 'times', id: "drawer_dalete")
+          %h2 Menu
+          %ul
+            %li
+              = link_to user_path(@current_user) do
+                = user_image_tag(@current_user, '', 30, 30)
+                = user_name(@current_user)
+            %li
+              = link_to root_path do
+                = icon('fas', 'address-book')
+                %span 出席状況
+            %li
+              = link_to ranking_path do
+                = icon('fas', 'trophy')
+                %span ランキング
+            %li
+              = link_to member_path do
+                = icon('fas', 'users')
+                %span メンバーリスト
+            %li
+              = link_to logout_path, method: :delete do
+                = icon('fas', 'sign-out-alt')
+                %span ログアウト
+        = render "layouts/header"
     %main#container
       = yield
