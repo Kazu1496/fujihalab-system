@@ -6,13 +6,14 @@ module Attendance extend self
 
     users.each do |user|
       latest_existence = user.existences.last
+      latest_existence.update(exit_time: now_time - 60)
+      
       existences = Existence.where(user_id: user.id)
       total_time = controller.total_time(existences)
 
       controller.delete_pixel(user, now_time.strftime("%Y%m%d"))
       if controller.create_pixel(user, now_time, total_time)
         user.update!(status: false)
-        latest_existence.update(exit_time: now_time - 60)
       end
 
       user.update!(
