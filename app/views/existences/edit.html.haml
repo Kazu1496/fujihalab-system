@@ -1,27 +1,28 @@
 - provide(:title, '在籍情報の変更')
-- if flash[:alert].present?
-  %p= flash[:alert]
 
-= form_for @existence, url: { action: 'update' } do |f|
-  .field
-    %strong 変更前（入室時間）
-    %p= @existence.enter_time.present? ? datetime_encorder(@existence.enter_time) : "記録なし"
+#existence_edit_container
+  %h1
+    %span 出席情報の編集
+    Edit of attendance
 
-  .field
-    %strong 変更後（入室時間）
-    = f.label :enter_time
-    = f.time_field :enter_time
+  = form_for @existence, url: { action: 'update' } do |f|
+    .field
+      %strong 変更前（入室時間）
+      %p= @existence.enter_time.present? ? datetime_encorder(@existence.enter_time) : "記録なし"
 
-  .field
-    %strong 変更前（退室時間）
-    %p= @existence.exit_time.present? ? datetime_encorder(@existence.exit_time) : "記録なし"
+    .field
+      = f.label '変更後（入室時間）'
+      = f.time_field :enter_time
 
-  .field
-    %strong 変更後（退室時間）
-    = f.label :exit_time
-    = f.time_field :exit_time
+    .field
+      %strong 変更前（退室時間）
+      %p= @existence.exit_time.present? ? datetime_encorder(@existence.exit_time) : "記録なし"
 
-  .actions
-    = f.submit '更新する'
+    .field
+      = f.label '変更後（退室時間）'
+      = f.time_field :exit_time
 
-= link_to 'Back', user_path(@existence.user_id)
+    .action
+      = f.submit '更新する'
+
+    = link_to 'ユーザー情報に戻る', user_path(@existence.user_id), class: "back_btn"
