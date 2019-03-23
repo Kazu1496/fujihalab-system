@@ -1,4 +1,15 @@
 window.onload = function(){
+  // アラートメッセージのフェードアウト処理
+  const alert_message = document.getElementById('alert');
+  if (alert_message){
+    setTimeout(function(){
+      alert_message.classList.add('fadeout');
+      alert_message.addEventListener("animationend", function(){
+        alert_message.setAttribute('style', "display: none;");
+      });
+    }, 1500);
+  };
+
   //　ドロワー周りの処理
   const drawerMenu = document.getElementById('header_elements_sp');
   const drawerDeletebtn = document.getElementById('drawer_dalete');
@@ -64,13 +75,25 @@ window.onload = function(){
     }, false);
 
     function toggleCard(){
-      if(this.classList.contains('opened')){
-        this.classList.remove('opened');
+      if(this.classList.contains('show')){
+        this.classList.remove('show');
         cardOverlay.classList.add('open');
       } else {
-        this.classList.add('opened');
+        this.classList.add('show');
         cardOverlay.classList.remove('open');
       };
     };
   };
+
+  const cards = document.querySelectorAll('.card_elements');
+
+  function transition() {
+    if (this.classList.contains('show')) {
+      this.classList.remove('show')
+    } else {
+      this.classList.add('show');
+    }
+  }
+
+  cards.forEach(card => card.addEventListener('click', transition));
 };

@@ -77,18 +77,23 @@ class UsersController < ApplicationController
     end
 
     respond_to do |format|
-      if @user.save && user_result["isSuccess"] && graph_result["isSuccess"]
-        notifier = Slack::Notifier.new(ENV['SLACK_WEBHOOK_URL'])
-        notifier.ping(
-          "[#{Rails.env}] #{username}さんが出席しました。"
-        )
+      if user_result["isSuccess"] && graph_result["isSuccess"]
+        if @user.save
+          notifier = Slack::Notifier.new(ENV['SLACK_WEBHOOK_URL'])
+          notifier.ping(
+            "[#{Rails.env}] #{username}さんが出席しました。"
+          )
 
-        @user.existences.create!(user_id: @user.id, enter_time: update_time(nil, now_time))
+          @user.existences.create!(user_id: @user.id, enter_time: update_time(nil, now_time))
 
-        sign_in(@user)
-        format.html { redirect_to @user, notice: 'ユーザー登録が完了しました。' }
+          sign_in(@user)
+          format.html { redirect_to @user, notice: 'ユーザー登録が完了しました。' }
+        else
+          flash[:alert] = "ユーザ登録ができませんでした。再度やり直してください"
+          format.html { render :new }
+        end
       else
-        flash[:alert] = "ユーザ登録ができませんでした。再度やり直してください"
+        flash[:alert] = "既にPixe.laに登録済みのユーザー名のため登録に失敗しました。"
         format.html { render :new }
       end
     end
