@@ -81,7 +81,7 @@ class UsersController < ApplicationController
         if @user.save
           notifier = Slack::Notifier.new(ENV['SLACK_WEBHOOK_URL'])
           notifier.ping(
-            "[#{Rails.env}] #{username}さんが出席しました。"
+            "[#{Rails.env}] 🎉#{username}さんがユーザー登録しました🎉"
           )
 
           @user.existences.create!(user_id: @user.id, enter_time: update_time(nil, now_time))
