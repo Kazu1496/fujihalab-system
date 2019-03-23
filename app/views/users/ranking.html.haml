@@ -1,20 +1,24 @@
 - provide(:title, 'ランキング')
 
-%h1 在室時間ランキング
-%table
-  %thead
-    %tr
-      %th 氏名
-      %th 在室状況
-      %th 総在室時間
-      %th 詳細情報
-  %tbody
+#ranking_container
+  %h1
+    %span 在室ランキング
+    Ranking of Attendance
+  %ul
     - @users.each_with_index do |user, index|
-      %tr
-        %td
-          = index + 1
-          = user_image_tag(user, "", 80, 80)
-          = user_name(user)
-        %td= user.status? ? '入室中' : '退室中'
-        %td #{user.total_time} 時間
-        %td= link_to 'Show', user
+      %li
+        .user_image
+          %span= index + 1
+          = user_image_tag(user, "", 100, 100)
+        .user_items
+          %p.name= user_name(user)
+          .user_status
+            %p.status
+              ステータス：
+              = user.status? ? '入室中' : '退室中'
+            %p.total_time
+              総在室時間：
+              #{user.total_time} 時間
+          = link_to user_path(user), class: "show_more" do
+            もっとみる
+            = icon('fas','arrow-right')
