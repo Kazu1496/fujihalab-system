@@ -1,0 +1,34 @@
+$first_color: #FFC107;
+$second_color: #FFA000;
+$third_color: #26C6DA;
+
+$primary_white_text: rgba(#FFF,0.87);
+$secondary_white_text: rgba(#FFF,0.54);
+$hint_white_text: rgba(#FFF,0.38);
+$divider_white_text: rgba(#FFF,0.14);
+
+$primary_black_text: rgba(#000,0.87);
+$secondary_black_text: rgba(#000,0.54);
+$hint_black_text: rgba(#000,0.38);
+$divider_black_text: rgba(#000,0.14);
+
+@mixin shadow($vertical, $blur, $depth, $opacity){
+  box-shadow: 0px $vertical $blur $depth rgba(0,0,0,$opacity);
+  -webkit-box-shadow: 0px $vertical $blur $depth rgba(0,0,0,$opacity);
+  -moz-box-shadow: 0px $vertical $blur $depth rgba(0,0,0,$opacity);
+}
+
+body{
+  color: $primary_black_text;
+  background-color: #F7F7F7;
+  word-wrap: break-word;
+}
+
+a, input[type="submit"]{
+  color: $third_color;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  &:hover{
+    opacity: 0.7;
+  }
+}

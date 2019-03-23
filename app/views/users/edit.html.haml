@@ -1,27 +1,32 @@
 - provide(:title, "#{user_name(@user)}のプロフィール設定")
-- if flash[:alert].present?
-  %p= flash[:alert]
 
-%h1 #{user_name(@user)}の詳細変更
+#user_edit_container
+  %h1
+    %span #{user_name(@user)}の詳細変更
+    Edit of #{user_name(@user)}
+  = form_for @user do |f|
+    .field
+      = f.label "ニックネーム"
+      = f.text_field :nickname, value: @user.nickname
 
-= form_for @user do |f|
-  .field
-    = f.label :nickname
-    = f.text_field :nickname, value: @user.nickname
+    .field
+      = user_image_tag(@user, "preview_img", 80, 80)
+      = f.label "プロフィール写真"
+      = f.file_field :picture, id: "post_img"
 
-  .field
-    = f.label :picture
-    = f.file_field :picture, id: "post_img"
-    = user_image_tag(@user, "preview_img", 80, 80)
-  .field
-    = f.label :password
-    = f.password_field :password
+    .field
+      = f.label "端末アドレス"
+      = f.text_field :address
 
-  .field
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation
+    .field
+      = f.label "パスワード"
+      = f.password_field :password
 
-  .actions
-    = f.submit
+    .field
+      = f.label "パスワード（確認）"
+      = f.password_field :password_confirmation
 
-= link_to 'Back', user_path(@user)
+    .action
+      = f.submit
+
+    = link_to '戻る', user_path(@user), class: "back_btn"

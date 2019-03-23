@@ -1,0 +1,31 @@
+- provide(:title, "ユーザー登録")
+
+#signup_container
+  %h1
+    %span ユーザー登録
+    Sign up
+  = form_for @user do |f|
+    .field
+      = f.label "ユーザー"
+      = f.text_field :name
+
+    .field
+      = f.label "ニックネーム"
+      = f.text_field :nickname
+
+    .field
+      = f.label "端末アドレス"
+      = f.text_field :address
+
+    .field
+      = f.label "パスワード"
+      = f.password_field :password
+
+    .field
+      = f.label "パスワード（確認）"
+      = f.password_field :password_confirmation
+
+    .action
+      = f.submit '登録する'
+
+    = link_to 'ログインページに戻る', login_path, class: "back_btn"

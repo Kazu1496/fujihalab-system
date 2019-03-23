@@ -1,0 +1,41 @@
+%header
+  - if @current_user.present?
+    - if from_pc?
+      %nav#header_elements_pc
+        .left_elements
+          = link_to "出席状況", root_path
+          = link_to "ランキング", ranking_path
+          = link_to "メンバーリスト", member_path
+        .right_elements
+          = link_to "ログアウト", logout_path, method: :delete
+          = link_to user_path(@current_user) do
+            = user_name(@current_user)
+            = user_image_tag(@current_user, '', 30, 30)
+    - else
+      = icon('fas', 'bars', id: 'menu_opener')
+      = link_to user_path(@current_user) do
+        = user_image_tag(@current_user, '', 30, 30)
+      %nav#header_elements_sp
+        = icon('fas', 'times', id: "drawer_dalete")
+        %h2 Menu
+        %ul
+          %li
+            = link_to user_path(@current_user) do
+              = user_image_tag(@current_user, '', 30, 30)
+              = user_name(@current_user)
+          %li
+            = link_to root_path do
+              = icon('fas', 'address-book')
+              %span 出席状況
+          %li
+            = link_to ranking_path do
+              = icon('fas', 'trophy')
+              %span ランキング
+          %li
+            = link_to member_path do
+              = icon('fas', 'users')
+              %span メンバーリスト
+          %li
+            = link_to logout_path, method: :delete do
+              = icon('fas', 'sign-out-alt')
+              %span ログアウト

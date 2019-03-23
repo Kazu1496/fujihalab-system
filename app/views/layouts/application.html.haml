@@ -1,0 +1,20 @@
+!!! 5
+%html
+  %head
+    %title
+      = "#{yield(:title)} | 藤原研入退室情報"
+    = csrf_meta_tags
+    = csp_meta_tag
+    %meta{content: "width=device-width, initial-scale=1.0, maximum-scale=2.0", name: "viewport"}
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+
+  %head
+  %body
+    %div#drawer_overlay.open
+    %div#card_overlay.open
+    = render "layouts/flash"
+    = render "layouts/header"
+    %main#container
+      = yield
+    = render "layouts/footer"

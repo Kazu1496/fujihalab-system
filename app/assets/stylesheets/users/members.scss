@@ -1,0 +1,70 @@
+@import "settings";
+
+@media all and (min-width: 769px){
+  #members_container{
+    width: 100%;
+    margin: 60px auto;
+    h1{
+      font-size: 45px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      span{
+        display: block;
+        font-size: 20px;
+        font-weight: bold;
+      }
+    }
+    ul{
+      @include shadow(4px, 10px, 3px, 0.5);
+      width: 600px;
+      border-radius: 10px;
+      background-color: #FFF;
+      padding: 20px 0;
+      margin: auto;
+      li{
+        display: flex;
+        align-items: center;
+        padding: 20px 0;
+        margin: 0 40px;
+        &:not(:last-child){
+          border-bottom: 1px solid $divider_black_text;
+        }
+        .user_image{
+          position: relative;
+          width: 100px;
+          height: 100px;
+          margin: 0 30px;
+          span{
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #FFF;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: $second_color;
+            padding: 3px 10px;
+          }
+        }
+        .user_items{
+          display: flex;
+          flex-direction: column;
+          .name{
+            color: $secondary_black_text;
+            font-size: 24px;
+            font-weight: bold;
+          }
+          .user_status{
+            display: flex;
+            color: $hint_black_text;
+            p:first-child{
+              margin-right: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media all and (max-width: 769px){
+}
