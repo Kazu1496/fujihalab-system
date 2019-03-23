@@ -30,6 +30,8 @@ class Api::V1::ExistencesController < ApplicationController
           existence.update!(enter_time: update_time(nil, now_time))
         else
           existence = user.existences.order(:created_at).last
+          existence.update!(exit_time: update_time(nil, now_time))
+
           existences = Existence.where(user_id: user.id)
           total_time = total_time(existences)
 
@@ -43,7 +45,6 @@ class Api::V1::ExistencesController < ApplicationController
               "[#{Rails.env}] #{username}さんが退席しました。"
             )
             user.update!(status: false, total_time: total_time)
-            existence.update!(exit_time: update_time(nil, now_time))
             render json: {status: 200, message: "Pixel create successfully!"}
           else
             render json: {status: 400, message: "Pixel create faild..."}
