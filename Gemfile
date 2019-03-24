@@ -59,5 +59,5 @@ end
 
 group :production do
   gem 'mysql2'
-  gem 'unicorn'
+  gem 'unicorn', '5.4.1'
 end

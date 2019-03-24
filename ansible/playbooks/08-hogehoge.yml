@@ -8,7 +8,7 @@
       shell: sudo service mysqld start
 
     - name: db create and db migrate
-      shell: rake db:create RAILS_ENV=production && rake db:migrate RAILS_ENV=production
+      shell: bundle install --without test development &&rake db:create RAILS_ENV=production && rake db:migrate RAILS_ENV=production
       args:
         chdir: /var/www/fujihalab-system/
 

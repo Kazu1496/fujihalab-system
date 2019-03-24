@@ -9,7 +9,7 @@
     - name: "nginx 設定ファイルの設置"
       sudo: yes
       copy: src=templates/fujihalab-system.conf
-        dest=/etc/nginx/conf.d/fujihalab-system.conf
+        dest=/etc/nginx/conf.d/nginx.conf
 
     - name: nginxの権限変更
       sudo: yes
