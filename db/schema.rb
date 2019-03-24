@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_17_051854) do
+ActiveRecord::Schema.define(version: 2019_03_24_082742) do
 
   create_table "existences", force: :cascade do |t|
     t.integer "user_id"
@@ -24,13 +24,13 @@ ActiveRecord::Schema.define(version: 2019_03_17_051854) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status", default: 1
+    t.boolean "status", default: true
     t.string "picture"
-    t.string "pixela_token"
     t.string "password_digest"
     t.string "nickname"
     t.string "remember_token"
     t.integer "total_time", default: 0
+    t.string "address"
   end
 
 end

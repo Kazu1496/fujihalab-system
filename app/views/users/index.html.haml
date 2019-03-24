@@ -5,7 +5,7 @@
     %span 出席状況
     In attendance
   %ul
-    - if @user.present?
+    - if @users.present?
       - @users.each do |user|
         .card_container
           .card_elements
