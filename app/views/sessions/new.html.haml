@@ -4,15 +4,10 @@
   %h1
     %span ログイン
     Sign in
-  = form_for :session, url: login_path do |f|
-    .field
-      = f.label "ユーザー名"
-      = f.text_field :name
-
-    .field
-      = f.label "パスワード"
-      = f.password_field :password
-
+  = simple_form_for :session, url: login_path do |f|
+    = f.error_notification
+    = f.input :name, label: 'ユーザー名'
+    = f.input :password, label: 'パスワード'
     .action
       = f.submit 'ログイン'
 

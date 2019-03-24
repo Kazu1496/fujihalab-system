@@ -5,23 +5,14 @@
     %span 出席情報の編集
     Edit of attendance
 
-  = form_for @existence, url: { action: 'update' } do |f|
+  = simple_form_for @existence, url: { action: 'update' } do |f|
+    = f.error_notification
     .field
-      %strong 変更前（入室時間）
-      %p= @existence.enter_time.present? ? datetime_encorder(@existence.enter_time) : "記録なし"
-
-    .field
-      = f.label '変更後（入室時間）'
+      = f.label "出席時間"
       = f.time_field :enter_time
-
     .field
-      %strong 変更前（退室時間）
-      %p= @existence.exit_time.present? ? datetime_encorder(@existence.exit_time) : "記録なし"
-
-    .field
-      = f.label '変更後（退室時間）'
+      = f.label "退席時間"
       = f.time_field :exit_time
-
     .action
       = f.submit '更新する'
 

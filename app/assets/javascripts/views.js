@@ -41,7 +41,7 @@ window.onload = function(){
   };
 
   // プロフィール画像即時プレビュー用
-  const postImage = document.getElementById('post_img');
+  const postImage = document.getElementById('user_picture');
   const previewImage = document.getElementById('preview_img');
 
   if(postImage){
@@ -94,6 +94,8 @@ window.onload = function(){
       this.classList.add('show');
     }
   }
-
   cards.forEach(card => card.addEventListener('click', transition));
+
+  // バリデーション
+  $('#registration_form').parsley();
 };
