@@ -71,4 +71,85 @@
   }
 }
 @media all and (max-width: 768px){
+  #ranking_container{
+    width: 100%;
+    margin: 20px auto 40px;
+    h1{
+      font-size: 26px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      span{
+        display: block;
+        font-size: 16px;
+        font-weight: bold;
+      }
+    }
+    ul{
+      @include shadow(4px, 10px, 3px, 0.5);
+      overflow: scroll;
+      width: 85%;
+      max-height: 500px;
+      border-radius: 10px;
+      background-color: #FFF;
+      padding: 10px 0;
+      margin: auto;
+      li{
+        display: flex;
+        align-items: center;
+        padding: 15px 0;
+        margin: 0 10px;
+        &:not(:last-child){
+          border-bottom: 1px solid $divider_black_text;
+        }
+        .user_image{
+          position: relative;
+          width: 100px;
+          height: 100px;
+          margin: 0 10px;
+          span{
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #FFF;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: $second_color;
+            padding: 3px 10px;
+          }
+          img{
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            font-family: 'object-fit: cover;';
+          }
+        }
+        .user_items{
+          display: flex;
+          flex-direction: column;
+          margin-left: 10px;
+          .name{
+            color: $secondary_black_text;
+            font-size: 16px;
+            font-weight: bold;
+          }
+          .user_status{
+            display: flex;
+            flex-direction: column;
+            color: $hint_black_text;
+            font-size: 11px;
+            p{
+              &:first-child{
+                margin-right: 20px;
+              }
+            }
+          }
+          .show_more{
+            font-size: 13px;
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+  }
 }
