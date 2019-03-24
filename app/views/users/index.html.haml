@@ -6,17 +6,17 @@
     In attendance
   %ul
     - if @users.present?
-      - @users.each do |user|
+      - @users.each_with_index do |user, index|
         .card_container
           .card_elements
             %li.side.front
               = user_image_tag(user, "", 300, 300)
               .user_elements
                 %p= user_name(user)
-                = link_to "javascript:void(0)", class: "show_card", data: {user: user.id} do
+                = link_to "javascript:void(0)", class: "show_card", data: {index: index} do
                   Show
                   = icon('fas','arrow-right')
-            .user_card.side.back{data: {user: user.id}}
+            .user_card.side.back{data: {index: index}}
               %h2
                 = user_name(user)
               .user_card_info
@@ -37,6 +37,6 @@
                   = link_to user_path(user), class: "show_more" do
                     もっとみる
                     = icon('fas','arrow-right')
-                = icon('fas', 'times', class: "card_dalete", data: {user: user.id})
+                = icon('fas', 'times', class: "card_dalete", data: {index: index})
     - else
       %p.any_user_text 現在出席中のユーザーは存在しません。
