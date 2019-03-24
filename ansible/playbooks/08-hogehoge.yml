@@ -1,0 +1,15 @@
+- hosts: all
+  name: Fujihalab-system用の環境構築
+  gather_facts: no
+  remote_user: ec2-user
+  tasks:
+    - name: mysql demonの立ち上げ
+      sudo: yes
+      shell: sudo service mysqld start
+
+    - name: db create and db migrate
+      shell: bundle install --without test development &&rake db:create RAILS_ENV=production && rake db:migrate RAILS_ENV=production
+      args:
+        chdir: /var/www/fujihalab-system/
+
+
