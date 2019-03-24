@@ -1,7 +1,8 @@
 @import "settings";
 
 @media all and (min-width: 769px){
-  body{
+  html, body{
+    height: 100%;
     #alert{
       position: fixed;
       display: flex;
@@ -45,6 +46,8 @@
           a{
             img{
               border-radius: 50%;
+              object-fit: cover;
+              font-family: 'object-fit: cover;';
               margin-left: 5px;
             }
           }

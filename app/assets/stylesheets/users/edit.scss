@@ -22,7 +22,15 @@
       border-radius: 10px;
       padding: 40px 20px;
       margin: 0 auto;
-      .field{
+      .error_notification{
+        width: 350px;
+        color: #FFF;
+        text-align: center;
+        background-color: #F00;
+        padding: 10px 0;
+        margin: auto;
+      }
+      .input{
         margin: 20px 40px;
         label{
           display: block;
@@ -46,6 +54,14 @@
             -webkit-box-shadow: 0 0 0px 1000px white inset;
             box-shadow: 0 0 0px 1000px white inset;
           }
+        }
+      }
+      .image_field{
+        display: flex;
+        align-items: center;
+        img{
+          object-fit: cover;
+          font-family: 'object-fit: cover;';
         }
       }
       .action{

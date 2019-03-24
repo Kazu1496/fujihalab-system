@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   skip_before_action :require_sign_in!, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :already_sign_in?, only: [:new, :create]
-  before_action :white_list_ip?, only: [:new, :create]
 
   def index
     @users = User.where(status: true)
@@ -84,6 +83,8 @@ class UsersController < ApplicationController
             "[#{Rails.env}] 🎉#{username}さんがユーザー登録しました🎉"
           )
 
+          @user.existences.create(enter_time: update_time(nil, now_time))
+
           sign_in(@user)
           format.html { redirect_to @user, notice: 'ユーザー登録が完了しました。' }
         else
@@ -114,6 +115,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :nickname, :picture, :password, :password_confirmation, :address).merge(pixela_token: SecureRandom.hex(32))
+      params.require(:user).permit(:name, :nickname, :picture, :password, :password_confirmation, :address).merge(status: true, pixela_token: SecureRandom.hex(32))
     end
 end
