@@ -1,0 +1,32 @@
+ja:
+  helpers:
+    submit:
+        create: '登録する'
+        update: '更新する'
+        submit: '保存する'
+  simple_form:
+    labels:
+      user:
+        name: 'ユーザー名'
+        password: 'パスワード'
+        password_confirmation: 'パスワード（確認）'
+        nickname: 'ニックネーム'
+        address: '端末アドレス'
+        picture: 'プロフィール写真'
+    hints:
+      user:
+        name: '半角英数字、ハイフン（-）のみが使えます'
+        address: '半角大文字で入力してください'
+    placeholders:
+      user:
+        name: 'サインインする際に使用されます'
+        address: 'XX:XX:XX:XX:XX:XX'
+    error_notification:
+      default_message: "以下の内容を確認してください:"
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'バリデーションに失敗しました: %{errors}'
+        restrict_dependent_destroy:
+          has_one: "%{record}が存在しているので削除できません"
+          has_many: "%{record}が存在しているので削除できません"
