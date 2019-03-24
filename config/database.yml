@@ -27,5 +27,5 @@ production:
   database: fujihalab-system_prediction
   pool: 5
   username: root
-  password:
+  password: DInjFbrcY4&A
   socket: /tmp/mysql.sock
