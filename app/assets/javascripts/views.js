@@ -67,10 +67,10 @@ window.onload = function(){
   if(openCards[0]){
     document.addEventListener('click', function(event){
       if(event.target.classList.contains('show_card')){
-        toggleCard.call(openCards[event.target.dataset.user - 1]);
+        toggleCard.call(openCards[event.target.dataset.index]);
       }
       else if(event.target.classList.contains('card_dalete')){
-        toggleCard.call(openCards[event.target.dataset.user - 1]);
+        toggleCard.call(openCards[event.target.dataset.index]);
       }
     }, false);
 

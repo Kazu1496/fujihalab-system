@@ -13,10 +13,10 @@
         .user_items
           %p.name= user_name(user)
           .user_status
-            %p.status
+            %p
               ステータス：
               = user.status? ? '出席中' : '退席中'
-            %p.total_time
+            %p
               総在室時間：
               #{user.total_time} 時間
           = link_to user_path(user), class: "show_more" do

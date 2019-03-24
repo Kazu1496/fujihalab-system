@@ -172,81 +172,98 @@
       background-color: #FFF;
       margin: 0 auto;
       padding: 10px;
-      .user_container{
-        li{
-          display: flex;
-          align-items: center;
-          padding: 10px;
-          margin: 10px 0;
-          &:not(:last-child){
-            border-bottom: 1px solid $divider_black_text;
-          }
-          img{
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin-right: 20px;
-          }
-          .user_elements{
+      .card_container{
+        .card_elements{
+          li{
             display: flex;
-            flex-direction: column;
-            color: $secondary_black_text;
-            font-weight: bold;
-          }
-        }
-        .user_card{
-          @include shadow(4px,10px, 3px, 0.5);
-          display: none;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, 525px);
-          width: 280px;
-          height: 500px;
-          background-color: #F7F7F7;
-          border-radius: 10px;
-          padding: 10px;
-          &.show{
-            display: block;
-            z-index: 3;
-            animation: card_show 0.3s ease 0s forwards;
-          }
-          h2{
-            font-size: 20px;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 20px;
-          }
-          &_info{
-            text-align: center;
+            align-items: center;
+            padding: 10px;
+            margin: 10px 0;
+            &:not(:last-child){
+              border-bottom: 1px solid $divider_black_text;
+            }
             img{
-              @include shadow(4px,5px, 2px, 0.6);
+              width: 60px;
+              height: 60px;
               border-radius: 50%;
+              margin-right: 20px;
+            }
+            .user_elements{
+              display: flex;
+              flex-direction: column;
+              color: $secondary_black_text;
+              font-weight: bold;
+            }
+          }
+          .user_card{
+            @include shadow(4px,10px, 3px, 0.5);
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 525px);
+            width: 280px;
+            height: 450px;
+            background-color: #FFF;
+            &.show{
+              display: block;
+              z-index: 3;
+              animation: card_show 0.3s ease 0s forwards;
+            }
+            h2{
+              font-size: 20px;
+              font-weight: bold;
+              text-align: center;
               margin-top: 20px;
             }
-            &_elements{
-              @include shadow(4px,5px, 2px, 0.6);
-              width: 220px;
-              background-color: #F7F7F7;
-              border-radius: 10px;
-              padding: 15px;
-              margin: 0px auto 20px;
-              p{
-                width: 180px;
-                border-bottom: 2px solid $second_color;
-                margin: 15px auto;
+            &_info{
+              text-align: center;
+              img{
+                @include shadow(4px,5px, 2px, 0.6);
+                border-radius: 50%;
+                width: 160px;
+                height: 160px;
+                margin-top: 25px;
               }
-            }
-            .card_dalete{
-              @include shadow(4px, 5px, 2px, 0.6);
-              position: absolute;
-              bottom: 10px;
-              right: 10px;
-              color: $primary_white_text;
-              font-size: 20px;
-              border-radius: 50%;
-              background-color: $second_color;
-              padding: 15px;
+              &_elements{
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 180px;
+                background-color: $second_color;
+                &_text{
+                  height: 110px;
+                  color: #FFF;
+                  text-align: left;
+                  p{
+                    margin: 10px 15px;
+                    a{
+                      color: inherit;
+                      text-decoration: underline;
+                    }
+                  }
+                }
+                .show_more{
+                  @include shadow(4px,5px, 2px, 0.6);
+                  display: block;
+                  width: 120px;
+                  background-color: #FFF;
+                  border-radius: 10px;
+                  padding: 5px;
+                  margin: 10px auto 0;
+                }
+              }
+              .card_dalete{
+                @include shadow(4px, 5px, 2px, 0.6);
+                position: absolute;
+                top: -20px;
+                right: -20px;
+                color: #FFF;
+                font-size: 20px;
+                border-radius: 50%;
+                background-color: $third_color;
+                padding: 15px;
+              }
             }
           }
         }
