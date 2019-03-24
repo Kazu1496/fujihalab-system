@@ -15,7 +15,7 @@ ja:
         picture: 'プロフィール写真'
     hints:
       user:
-        name: '半角英数字、ハイフン（-）のみが使えます'
+        name: '半角英数字、ハイフン(-)のみが使えます'
         address: '半角大文字で入力してください'
     placeholders:
       user:

@@ -2,10 +2,35 @@
 %html
   %head
     %title
-      = "#{yield(:title)} | 藤原研入退室情報"
+      = "#{yield(:title)} | 藤原研入退室システム"
     = csrf_meta_tags
     = csp_meta_tag
+    %meta{charset: "utf-8"}
     %meta{content: "width=device-width, initial-scale=1.0, maximum-scale=2.0", name: "viewport"}
+    %meta{http_equiv: "X-UA-Compatible", content: "IE=edge"}
+    %meta{name: "description", content: "千葉工業大学情報通信システム工学科藤原研究室の出退席管理システムです。"}
+    %meta{name: "robots", content: "noindex,nofollow"}
+    %meta{name: "msapplication-TileColor", content: "#da532c"}
+    %meta{name: "theme-color", content: "#ffffff"}
+    %meta{property: "og:url", content: "https://fujihalab-system.com"}
+    %meta{property: "og:type", content: "website"}
+    %meta{property: "og:title", content: "Fujihalab System | 藤原研入退室システム"}
+    %meta{property: "og:description", content: "千葉工業大学情報通信システム工学科藤原研究室の出退席管理システムです。"}
+    -# %meta{property: "og:site_name", content: ""}
+    -# %meta{property: "og:image", content: ":  asset_url 'ogp_image.png' %"}
+    = favicon_link_tag('favicon/icon-180x180.png',
+                     {rel: 'apple-touch-icon',
+                      sizes: '180x180',
+                      type: 'image/png'})
+    = favicon_link_tag('favicon/icon-32x32.png',
+                     {rel: 'icon',
+                      sizes: '32x32',
+                      type: 'image/png'})
+    = favicon_link_tag('favicon/icon-16x16.png',
+                     {rel: 'icon',
+                      sizes: '16x16',
+                      type: 'image/png'})
+
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
 

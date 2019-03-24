@@ -33,23 +33,42 @@ a, input[type="submit"]{
   }
 }
 
-abbr{
-  color: #F00;
+@media all and (min-width: 769px){
+  abbr{
+    color: #F00;
+  }
+  .hint{
+    display: block;
+    color: $hint_black_text;
+    font-size: 12px;
+  }
+  .error{
+    color: #F00;
+  }
+  .parsley-errors-list{
+    li{
+      color: #F00;
+      font-size: 13px;
+    }
+  }
 }
-
-.hint{
-  display: block;
-  color: $hint_black_text;
-  font-size: 12px;
-}
-
-.error{
-  color: #F00;
-}
-
-.parsley-errors-list{
-  li{
+@media all and (max-width: 768px){
+  abbr{
+    color: #F00;
+  }
+  .hint{
+    display: block;
+    color: $hint_black_text;
+    font-size: 10px;
+  }
+  .error{
     color: #F00;
     font-size: 13px;
+  }
+  .parsley-errors-list{
+    li{
+      color: #F00;
+      font-size: 13px;
+    }
   }
 }
