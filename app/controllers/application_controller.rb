@@ -108,4 +108,18 @@ class ApplicationController < ActionController::Base
         redirect_to login_path
       end
     end
+
+    def slack_notification(message)
+      if ENV['RAILS_ENV'] == 'production'
+        notifier = Slack::Notifier.new(ENV['PRODUCTION_SLACK_WEBHOOK_URL'])
+        notifier.ping(
+          message
+        )
+      else
+        notifier = Slack::Notifier.new(ENV['OTHER_SLACK_WEBHOOK_URL'])
+        notifier.ping(
+          "[#{Rails.env}] #{message}"
+        )
+      end
+    end
 end
