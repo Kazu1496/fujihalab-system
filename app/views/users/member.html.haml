@@ -14,7 +14,7 @@
           .user_status
             %p.status
               ステータス：
-              = user.status? ? '入室中' : '退室中'
+              = user.status? ? '出席中' : '退席中'
             %p.total_time
               総在室時間：
               #{user.total_time} 時間

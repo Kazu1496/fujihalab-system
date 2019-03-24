@@ -4,32 +4,24 @@
   %h1
     %span #{user_name(@user)}の情報
     Infomation of #{user_name(@user)}
-
-  %p
-    名前:
-    = user_name(@user)
+  .user_elements
+    .user_elements_text
+      %p
+        %span ステータス:
+        = @user.status? ? '出席中' : '退席中'
+      %p
+        %span 総出席時間:
+        #{@user.total_time} 時間
+      %p
+        %span 卒業まで　:
+        = state = (0 > (450 - @user.total_time)) ? "卒業おめでとう！" : 450 - @user.total_time
+        時間
+      - if @current_user == @user
+        %p
+          %span プロフィール設定:
+          = link_to "Edit", edit_user_path(@user)
     = user_image_tag(@user, "", 130, 130)
-
-  %p
-    在室状況:
-    = @user.status? ? '入室中' : '退室中'
-
-  %p
-    総在室時間:
-    #{@user.total_time} 時間
-
-  %p
-    卒業まで:
-    = state = (0 > (450 - @user.total_time)) ? "卒業おめでとう！" : 450 - @user.total_time
-    時間
-
-  - if @current_user == @user
-    %p
-      プロフィール設定:
-      = link_to "Edit", edit_user_path(@user)
-
   %iframe{src: "https://pixe.la/v1/users/#{@user.name}/graphs/access-graph", width:"700", height: "150"}
-
   %table
     %thead
       %tr

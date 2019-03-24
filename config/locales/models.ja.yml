@@ -1,0 +1,17 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        nickname: 'ニックネーム'
+        name: 'ユーザー名'
+        password: 'パスワード'
+        password_confirmation: 'パスワード（確認）'
+        address: '端末アドレス'
+  activemodel:
+    attributes:
+      message:
+        nickname: 'ニックネーム'
+        name: 'ユーザー名'
+        password: 'パスワード'
+        password_confirmation: 'パスワード（確認）'
+        address: '端末アドレス'
