@@ -32,7 +32,7 @@
         - if @current_user == @user
           %th 編集
     %tbody
-      - @user.existences.order_by_enter_at.each do |existence|
+      - @existences.each do |existence|
         %tr
           %td= existence.enter_time.strftime("%Y年%m月%d日")
           %td= datetime_encorder(existence.enter_time)
@@ -40,3 +40,4 @@
           %td= stay_time(existence)
           - if @current_user == @user && existence.enter_time.present? && existence.exit_time.present?
             %td= link_to "Edit", edit_user_existence_path(@user, existence.id)
+  = will_paginate @existences, previous_label: '&lt 前へ', next_label: '次へ &gt'
