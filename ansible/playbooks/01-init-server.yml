@@ -7,6 +7,8 @@
     - name: vim, tmux, gitインストール
       yum: name="{{ item.name }}" state=present
       with_items:
+        - { name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm}
+        - { name: http://rpms.famillecollet.com/enterprise/remi-release-7.rpm}
         - { name: vim}
         - { name: git}
         - { name: gcc-c++}
@@ -25,5 +27,3 @@
         - { name: readline-devel}
         - { name: ImageMagick}
         - { name: ImageMagick-devel}
-        - { name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm}
-        - { name: http://rpms.famillecollet.com/enterprise/remi-release-7.rpm}

@@ -14,3 +14,19 @@
         - {name: "user.email", value: "fujiharabotaroh@gmail.com" }
         - {name: "ui.color",   value: "True" }
         - {name: "InsteadOf",  value: "https://github.com/"}
+
+    - name: ssh configにgithubの設定を追記
+      blockinfile:
+        dest: /home/ec2-user/.ssh/config
+        create: yes
+        block: |
+          Host github github.com
+            Hostname github.com
+            User git
+            IdentityFile ~/.ssh/aws_git_rsa
+
+    - name: .ssh/configの権限変更
+      file:
+        dest: /home/ec2-user/.ssh/config
+        mode: 600
+
