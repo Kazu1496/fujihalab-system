@@ -19,7 +19,7 @@ class ExistencesController < ApplicationController
       )
     else
       flash[:alert] = "無効な値が入力されたため、在籍情報の更新ができませんでした。再度やり直してください"
-      redirect_to edit_user_existence_path(user.id, @existence.id) and return
+      render :edit and return
     end
 
     total_time = total_time(Existence.where(user_id: user.id))

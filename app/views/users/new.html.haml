@@ -1,31 +1,17 @@
 - provide(:title, "ユーザー登録")
-- if flash[:alert].present?
-  %p= flash[:alert]
 
-%h1 新規会員登録
+#signup_container
+  %h1
+    %span ユーザー登録
+    Sign up
+  = simple_form_for @user, id: "registration_form", data: { parsley_validate: true, parsley_trigger: "keyup focusout change input" } do |f|
+    = f.error_notification
+    = f.input :name, label: 'ユーザー名', required: true
+    = f.input :nickname, label: 'ニックネーム'
+    = f.input :address, label: '端末アドレス', required: true, pattern: "[0-9A-F]\{2\}\(:[0-9A-F]\{2\}\)\{5\}", data: { parsley_pattern: "[0-9A-F]\{2\}\(:[0-9A-F]\{2\}\)\{5\}" }
+    = f.input :password, label: 'パスワード'
+    = f.input :password_confirmation, label: 'パスワード（確認）', required: true
+    .action
+      = f.submit '登録する'
 
-= form_for @user do |f|
-  .field
-    = f.label "ユーザー"
-    = f.text_field :name
-
-  .field
-    = f.label "ニックネーム"
-    = f.text_field :nickname
-
-  .field
-    = f.label "端末アドレス"
-    = f.text_field :address
-
-  .field
-    = f.label "パスワード"
-    = f.password_field :password
-
-  .field
-    = f.label "パスワード（確認）"
-    = f.password_field :password_confirmation
-
-  .actions
-    = f.submit
-
-= link_to 'Back', login_path
+    = link_to 'ログインページに戻る', login_path, class: "back_btn"

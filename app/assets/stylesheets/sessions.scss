@@ -1,0 +1,82 @@
+@import "settings";
+
+@media all and (min-width: 769px){
+  #signup_container, #signin_container{
+    width: 600px;
+    margin: 60px auto;
+    h1{
+      font-size: 45px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      span{
+        display: block;
+        font-size: 20px;
+        font-weight: bold;
+      }
+    }
+    form{
+      @include shadow(4px, 10px, 3px, 0.5);
+      width: 540px;
+      background-color: #FFF;
+      border-radius: 10px;
+      padding: 40px 20px;
+      margin: 0 auto;
+      .error_notification{
+        width: 350px;
+        color: #FFF;
+        text-align: center;
+        background-color: #F00;
+        padding: 10px 0;
+        margin: auto;
+      }
+      .input{
+        margin: 20px 40px;
+        label{
+          display: block;
+          color: #9E9E9E;
+          font-size: 14px;
+        }
+        input{
+          border: none;
+          border-bottom: 1px solid #9E9E9E;
+          border-radius: 0;
+          outline: none;
+          height: 45px;
+          width: 100%;
+          font-size: 16px;
+          margin: 0 0 8px 0;
+          padding: 0;
+          box-shadow: none;
+          box-sizing: content-box;
+          transition: box-shadow .3s, border .3s;
+          &:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0px 1000px white inset;
+            box-shadow: 0 0 0px 1000px white inset;
+          }
+        }
+      }
+      .action{
+        text-align: center;
+        input{
+          width: 150px;
+          color: #FFF;
+          font-size: 16px;
+          font-weight: bold;
+          background-color: $second_color;
+          border-radius: 10px;
+          border-style: none;
+          cursor: pointer;
+          padding: 15px;
+        }
+      }
+      .back_btn{
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+      }
+    }
+  }
+}
+@media all and (max-width: 768px){
+}
