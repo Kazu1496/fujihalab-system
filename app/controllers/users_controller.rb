@@ -79,10 +79,8 @@ class UsersController < ApplicationController
     respond_to do |format|
       if user_result["isSuccess"] && graph_result["isSuccess"]
         if @user.save
-          notifier = Slack::Notifier.new(ENV['SLACK_WEBHOOK_URL'])
-          notifier.ping(
-            "[#{Rails.env}] 🎉#{username}さんがユーザー登録しました🎉"
-          )
+          # Slack退席通知処理
+          slack_notification("🎉#{username}さんがユーザー登録しました🎉")
 
           @user.existences.create(enter_time: update_time(nil, now_time))
 
