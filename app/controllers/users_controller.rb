@@ -38,7 +38,7 @@ class UsersController < ApplicationController
       user_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
       user_post_params = {
-        token: @user.pixela_token,
+        token: 'fujihalabtoken',
         username: @user.name,
         agreeTermsOfService: "yes",
         notMinor: "yes"
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
 
       graph_req = Net::HTTP::Post.new(graph_uri)
       graph_req.body = graph_post_params.to_json
-      graph_req["X-USER-TOKEN"] = @user.pixela_token
+      graph_req["X-USER-TOKEN"] = 'fujihalabtoken'
 
       graph_res = graph_http.request(graph_req)
       graph_result = JSON.parse(graph_res.body)
@@ -89,6 +89,21 @@ class UsersController < ApplicationController
           sign_in(@user)
           format.html { redirect_to @user, notice: 'ユーザー登録が完了しました。' }
         else
+          # DeleteUser
+          delete_user_uri = URI.parse("https://pixe.la/v1/users/#{@user.name}")
+          delete_user_http = Net::HTTP.new(delete_user_uri.host, delete_user_uri.port)
+
+          delete_user_http.use_ssl = true
+          delete_user_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+          delete_user_req = Net::HTTP::Delete.new(delete_user_uri)
+          delete_user_req["X-USER-TOKEN"] = 'fujihalabtoken'
+
+          delete_user_res = delete_user_http.request(delete_user_req)
+          delete_user_result = JSON.parse(user_res.body)
+
+          logger.debug(delete_user_result)
+
           flash[:alert] = "ユーザ登録ができませんでした。再度やり直してください"
           format.html { render :new }
         end
@@ -116,6 +131,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :nickname, :picture, :password, :password_confirmation, :address).merge(status: true, pixela_token: SecureRandom.hex(32))
+      params.require(:user).permit(:name, :nickname, :picture, :password, :password_confirmation, :address)
     end
 end

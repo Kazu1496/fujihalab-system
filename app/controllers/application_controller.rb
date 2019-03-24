@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
 
     pixel_req = Net::HTTP::Post.new(pixel_uri)
     pixel_req.body = pixel_post_params.to_json
-    pixel_req["X-USER-TOKEN"] = user.pixela_token
+    pixel_req["X-USER-TOKEN"] = 'fujihalabtoken'
 
     pixel_res = pixel_http.request(pixel_req)
     pixel_result = JSON.parse(pixel_res.body)
@@ -74,7 +74,7 @@ class ApplicationController < ActionController::Base
     delete_pixel_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
     delete_pixel_req = Net::HTTP::Delete.new(delete_pixel_uri)
-    delete_pixel_req["X-USER-TOKEN"] = user.pixela_token
+    delete_pixel_req["X-USER-TOKEN"] = 'fujihalabtoken'
 
     delete_pixel_res = delete_pixel_http.request(delete_pixel_req)
     logger.debug(JSON.parse(delete_pixel_res.body))
