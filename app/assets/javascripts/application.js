@@ -12,4 +12,8 @@
 //
 //= require rails-ujs
 //= require activestorage
+//= require jquery
+//= require jquery_ujs
+//= require parsley.min
+//= require parsley.i18n
 //= require_tree .

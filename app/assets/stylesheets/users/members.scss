@@ -45,6 +45,10 @@
             background-color: $second_color;
             padding: 3px 10px;
           }
+          img{
+            object-fit: cover;
+            font-family: 'object-fit: cover;';
+          }
         }
         .user_items{
           display: flex;

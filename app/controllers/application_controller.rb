@@ -77,6 +77,7 @@ class ApplicationController < ActionController::Base
     delete_pixel_req["X-USER-TOKEN"] = user.pixela_token
 
     delete_pixel_res = delete_pixel_http.request(delete_pixel_req)
+    logger.debug(JSON.parse(delete_pixel_res.body))
     delete_pixel_result = JSON.parse(delete_pixel_res.body)
   end
 

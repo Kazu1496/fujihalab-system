@@ -32,3 +32,24 @@ a, input[type="submit"]{
     opacity: 0.7;
   }
 }
+
+abbr{
+  color: #F00;
+}
+
+.hint{
+  display: block;
+  color: $hint_black_text;
+  font-size: 12px;
+}
+
+.error{
+  color: #F00;
+}
+
+.parsley-errors-list{
+  li{
+    color: #F00;
+    font-size: 13px;
+  }
+}
