@@ -20,10 +20,7 @@ class Api::V1::ExistencesController < ApplicationController
         username = user.nickname.present? ? user.nickname : user.name
         if status
           # Slack出席通知処理
-          notifier = Slack::Notifier.new(ENV['SLACK_WEBHOOK_URL'])
-          notifier.ping(
-            "[#{Rails.env}] #{username}さんが出席しました。"
-          )
+          slack_notification("#{username}さんが出席しました。")
 
           existence = user.existences.order(:created_at).create(user_id: user.id)
           user.update!(status: true)
@@ -40,10 +37,8 @@ class Api::V1::ExistencesController < ApplicationController
 
           if create_pixel(user, now_time, total_time) # CreatePixel
             # Slack退席通知処理
-            notifier = Slack::Notifier.new(ENV['SLACK_WEBHOOK_URL'])
-            notifier.ping(
-              "[#{Rails.env}] #{username}さんが退席しました。"
-            )
+            slack_notification("#{username}さんが退席しました。")
+
             user.update!(status: false, total_time: total_time)
             render json: {status: 200, message: "Pixel create successfully!"}
           else

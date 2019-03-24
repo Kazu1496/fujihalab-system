@@ -8,7 +8,9 @@ class UsersController < ApplicationController
     @users = User.where(status: true)
   end
 
-  def show; end
+  def show
+    @existences = @user.existences.order_by_enter_at.paginate(page: params[:page], per_page: 5)
+  end
 
   def edit; end
 
@@ -79,10 +81,8 @@ class UsersController < ApplicationController
     respond_to do |format|
       if user_result["isSuccess"] && graph_result["isSuccess"]
         if @user.save
-          notifier = Slack::Notifier.new(ENV['SLACK_WEBHOOK_URL'])
-          notifier.ping(
-            "[#{Rails.env}] 🎉#{username}さんがユーザー登録しました🎉"
-          )
+          # Slack退席通知処理
+          slack_notification("🎉#{username}さんがユーザー登録しました🎉")
 
           @user.existences.create(enter_time: update_time(nil, now_time))
 
