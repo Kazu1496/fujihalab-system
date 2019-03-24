@@ -1,15 +1,16 @@
 - hosts: all
   name: Fujihalab-system用の環境構築
-  sudo: yes
   gather_facts: no
   remote_user: ec2-user
   tasks:
-    - name: add git ssh
-      -
-    - name: Setup fujihalab-system repo
+    - name: /var/, /var/www/ ファイルの権限をec2-userに変更
+      sudo: yes
+      file: path="{{ item.path }}" owner=ec2-user
+      with_items:
+        - { path: /var/}
+        - { path: /var/www/}
+
+    - name: clone fujihalab-system repo
       git:
-        repo: https://github.com/2357gi/fujihalab-system.git
+        repo: git@github.com:2357gi/fujihalab-system.git
         dest: /var/www/fujihalab-system
-
-
-
