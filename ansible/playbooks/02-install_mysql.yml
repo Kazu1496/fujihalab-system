@@ -1,0 +1,22 @@
+- hosts: all
+  name: Fujihalab-system用の環境構築
+  sudo: yes
+  gather_facts: no
+  remote_user: ec2-user
+  tasks:
+    - name: Amazon Linux2からmarinaDBの除去
+      yum: name=mariadb-libs state=absent
+
+    - name: mysqlの構築
+      yum: name="{{ item.name }}" state=present
+      with_items:
+        - { name: mysql}
+        - { name: http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm}
+        - { name: mysql-community-server}
+        - { name: mysql-devel}
+
+    - name: node.jsのインストール
+      yum: name"{{ item.name }}" state=present enablerepo=epel
+      with_items:
+        - { name: nodejs}
+        - { name: npm}
