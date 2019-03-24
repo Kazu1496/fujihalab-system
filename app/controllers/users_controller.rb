@@ -8,7 +8,9 @@ class UsersController < ApplicationController
     @users = User.where(status: true)
   end
 
-  def show; end
+  def show
+    @existences = @user.existences.order_by_enter_at.paginate(page: params[:page], per_page: 5)
+  end
 
   def edit; end
 
