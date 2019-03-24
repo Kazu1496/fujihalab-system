@@ -1,0 +1,29 @@
+- hosts: all
+  name: Fujihalab-system用の環境構築
+  sudo: yes
+  gather_facts: no
+  remote_user: ec2-user
+  tasks:
+    - name: vim, tmux, gitインストール
+      yum: name="{{ item.name }}" state=present
+      with_items:
+        - { name: vim}
+        - { name: git}
+        - { name: gcc-c++}
+        - { name: patch}
+        - { name: tmux}
+        - { name: openssl-devel}
+        - { name: make}
+        - { name: libyaml-devel}
+        - { name: libffi-devel}
+        - { name: libicu-devel}
+        - { name: libxml2}
+        - { name: libxslt}
+        - { name: libxml2-devel}
+        - { name: libxslt-devel}
+        - { name: zlib-devel}
+        - { name: readline-devel}
+        - { name: ImageMagick}
+        - { name: ImageMagick-devel}
+        - { name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm}
+        - { name: http://rpms.famillecollet.com/enterprise/remi-release-7.rpm}
