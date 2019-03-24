@@ -21,6 +21,8 @@ gem 'slack-notifier'
 gem 'whenever', require: false
 gem "font-awesome-sass"
 gem "browser"
+gem "jquery-rails"
+gem 'simple_form'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

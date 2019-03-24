@@ -9,7 +9,7 @@ class Api::V1::ExistencesController < ApplicationController
   def post
     begin
       now_time = Time.now()
-      status = params[:status]
+      status = params[:status] == "1" ? true : false
       user = User.find_by(address: params[:addr])
 
       if user.present?
