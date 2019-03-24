@@ -1,7 +1,7 @@
 # Fujihalab-System
 千葉工業大学 藤原研のWebアプリ
 
-## 入退室管理System
+# 入退室管理System
 大学の研究室に接続することで入室となる。
 
 
@@ -53,4 +53,15 @@ rails s
 curl -X POST -H "Content-Type: application/json" -d '{"addr": "XX:XX:XX:XX:XX", "password": "password", "status": true}' http://0.0.0.0:3000/api/v1/existences
 ```
 
+
+## ansible
+サーバー構築わかりやすいようにansibleで書いた。
+
+以下の作業は手作業でやってください。
+- local-serverとserver-git間の鍵
+- rails のrake secret key
+
+それとnginxのconfigもj2使わずべた書きなのでご注意を。
+
+その後 `cd ansible && bash ./prediction.sh`
 
