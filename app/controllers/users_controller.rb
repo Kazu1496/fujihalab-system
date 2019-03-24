@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   skip_before_action :require_sign_in!, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :already_sign_in?, only: [:new, :create]
+  before_action :white_list_ip?, only: [:new, :create]
 
   def index
     @users = User.where(status: true)
