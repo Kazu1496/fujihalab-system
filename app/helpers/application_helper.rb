@@ -1,9 +1,9 @@
 module ApplicationHelper
   def from_pc?
-    not from_sp? && @current_user.present?
+    not from_sp?
   end
 
   def from_sp?
-    browser.device.mobile? && @current_user.present?
+    browser.device.mobile?
   end
 end

@@ -45,12 +45,12 @@
           }
         }
         .center_elements{
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
           a{
             img{
-              position: absolute;
-              top: 0;
-              left: 50%;
-              transform: translateX(-50%);
               height: 60px;
               width: auto;
             }
@@ -137,13 +137,14 @@
         margin-left: 15px;
       }
       #logo{
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        transform: translateX(-50%);
         img{
-          position: absolute;
-          top: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          height: 60px;
+          height: 50px;
           width: auto;
+          margin: 0;
         }
       }
       img{
