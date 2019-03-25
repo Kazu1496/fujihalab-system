@@ -20,7 +20,6 @@ gem 'bcrypt'
 gem 'slack-notifier'
 gem 'whenever', require: false
 gem "font-awesome-sass"
-gem "browser"
 gem "jquery-rails"
 gem 'simple_form'
 gem 'will_paginate'
