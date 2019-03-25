@@ -1,23 +1,24 @@
 %header
-  - if @current_user.present?
-    - if from_pc?
-      %nav#header_elements_pc
+  - if from_pc?
+    %nav#header_elements_pc
+      .center_elements
+        = link_to root_path do
+          = image_tag "logo.png"
+      - if @current_user.present?
         .left_elements
           = link_to "出席状況", root_path
           = link_to "ランキング", ranking_path
           = link_to "メンバーリスト", member_path
-        .center_elements
-          = link_to root_path do
-            = image_tag "logo.png"
         .right_elements
           = link_to "ログアウト", logout_path, method: :delete
           = link_to user_path(@current_user) do
             = user_name(@current_user)
             = user_image_tag(@current_user, '', 30, 30)
-    - else
+  - else
+    = link_to root_path, id: "logo" do
+      = image_tag "logo.png"
+    - if @current_user.present?
       = icon('fas', 'bars', id: 'menu_opener')
-      = link_to root_path, id: "logo" do
-        = image_tag "logo.png"
       = link_to user_path(@current_user) do
         = user_image_tag(@current_user, '', 30, 30)
       %nav#header_elements_sp
