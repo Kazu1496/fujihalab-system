@@ -11,7 +11,7 @@ window.onload = function(){
   };
 
   //　ドロワー周りの処理
-  const drawerMenu = document.getElementById('header_elements_sp');
+  const drawerMenu = document.getElementById('drawer_elements');
   const drawerDeletebtn = document.getElementById('drawer_dalete');
   const drawerOverlay = document.getElementById('drawer_overlay');
   const openButton = document.getElementById('menu_opener');
