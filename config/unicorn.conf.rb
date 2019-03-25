@@ -8,8 +8,8 @@ $std_log = File.expand_path 'log/unicorn.log', $app_dir
 # set config
 worker_processes  $worker
 working_directory $app_dir
-stderr_path $std_log
-stdout_path $std_log
+stderr_path File.expand_path('../../log/unicorn_stderr.log', __FILE__)
+stdout_path File.expand_path('../../log/unicorn_stdout.log', __FILE__)
 timeout $timeout
 listen  $listen
 pid $pid
