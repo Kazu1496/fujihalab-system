@@ -3,6 +3,7 @@
 @media all and (min-width: 769px){
   #index_container{
     width: 100%;
+    text-align: center;
     margin: 60px auto;
     h1{
       font-size: 45px;
@@ -151,6 +152,7 @@
 @media all and (max-width: 768px){
   #index_container{
     width: 100%;
+    text-align: center;
     margin: 20px 0 40px;
     h1{
       font-size: 30px;
