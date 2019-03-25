@@ -4,8 +4,8 @@
   %h1
     %span 出席状況
     In attendance
-  %ul
-    - if @users.present?
+  - if @users.present?
+    %ul
       - @users.each_with_index do |user, index|
         .card_container
           .card_elements
@@ -38,5 +38,5 @@
                     もっとみる
                     = icon('fas','arrow-right')
                 = icon('fas', 'times', class: "card_dalete", data: {index: index})
-    - else
-      %p.any_user_text 現在出席中のユーザーは存在しません。
+  - else
+    %p.any_user_text 現在出席中のユーザーは存在しません。
