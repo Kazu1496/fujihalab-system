@@ -62,6 +62,7 @@
               color: $secondary_black_text;
               font-size: 24px;
               font-weight: bold;
+              text-align: left;
               margin: 0 10px;
             }
             a{
@@ -141,11 +142,12 @@
           }
         }
       }
-      .any_user_text{
-        width: 100%;
-        text-align: center;
-        margin: 50px 0;
-      }
+    }
+    .any_user_text{
+      width: 100%;
+      color: $secondary_black_text;
+      text-align: center;
+      margin: 50px 0;
     }
   }
 }
@@ -270,6 +272,12 @@
           }
         }
       }
+    }
+    .any_user_text{
+      width: 100%;
+      color: $secondary_black_text;
+      text-align: center;
+      margin: 50px 0;
     }
   }
 }
