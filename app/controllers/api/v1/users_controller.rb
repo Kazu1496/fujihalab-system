@@ -3,6 +3,6 @@ class Api::V1::UsersController < ApplicationController
   before_action :white_list_ip?
 
   def get
-    render json: User.all.as_json(only: [:address, :status])
+    render json: User.where(status: true).as_json(only: [:address])
   end
 end

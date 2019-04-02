@@ -58,7 +58,7 @@ group :test do
   gem 'guard-minitest', '2.4.4'
 end
 
-group :production do
+group :production, :staging do
   gem 'mysql2'
   gem 'unicorn', '5.4.1'
 end
