@@ -85,6 +85,31 @@ window.onload = function(){
     };
   };
 
+  // モーダルアニメーション
+  const openModals = document.getElementsByClassName('modal');
+  const modalOverlay = document.getElementById('modal_overlay');
+
+  if(openModals[0] && modalOverlay){
+    document.addEventListener('click', function(event){
+      if(event.target.classList.contains('modal_open')){
+        toggleModal.call(openModals[event.target.dataset.index]);
+      }
+      else if(event.target.classList.contains('modal_close')){
+        toggleModal.call(openModals[event.target.dataset.index]);
+      }
+    }, false);
+
+    function toggleModal(){
+      if(this.classList.contains('show')){
+        this.classList.remove('show');
+        modalOverlay.classList.add('open');
+      } else {
+        this.classList.add('show');
+        modalOverlay.classList.remove('open');
+      };
+    };
+  };
+
   const cards = document.querySelectorAll('.card_elements');
 
   function transition() {

@@ -7,6 +7,7 @@
   - if @users.present?
     %ul
       - @users.each_with_index do |user, index|
+        = render 'modals/leave_modal', user: user, index: index
         .card_container
           .card_elements
             %li.side.front
@@ -34,9 +35,12 @@
                       %p
                         プロフィール設定 :
                         = link_to "Edit", edit_user_path(user)
-                  = link_to user_path(user), class: "show_more" do
-                    もっとみる
-                    = icon('fas','arrow-right')
-                = icon('fas', 'times', class: "card_dalete", data: {index: index})
+                  - if @current_user == user
+                    = link_to '退席する', 'javascript:void(0)', class: "show_more modal_open card_dalete", data: {index: index}
+                  - else
+                    = link_to user_path(user), class: "show_more" do
+                      もっとみる
+                      = icon('fas','arrow-right')
+                = icon('fas', 'times', class: "card_delete_button card_dalete", data: {index: index})
   - else
     %p.any_user_text 現在出席中のユーザーは存在しません。

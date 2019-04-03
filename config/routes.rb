@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'member', to: 'users#member'
 
   resources :users do
+    get 'leave', to: 'users#leave'
     resources :existences, only: [:edit, :update]
   end
 

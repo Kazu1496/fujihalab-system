@@ -21,6 +21,50 @@
       flex-wrap: wrap;
       width: 870px;
       margin: 0 auto;
+      .leave_modal_container{
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        background-color: #FFF;
+        border-radius: 10px;
+        padding: 40px;
+        &.show{
+          display: flex;
+          z-index: 3;
+          animation: modal_open 0.3s ease 0s forwards;
+        }
+        p{
+          font-size: 30px;
+          font-weight: bold;
+          margin-bottom: 30px;
+          span{
+            color: #F00;
+            text-decoration: underline;
+            font-weight: bold;
+          }
+        }
+        .button_area{
+          display: flex;
+          justify-content: space-around;
+          .leave_button{
+            width: 100px;
+            color: #FFF;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: $second_color;
+            border-radius: 10px;
+            border-style: none;
+            padding: 20px;
+            margin: 0 20px;
+          }
+        }
+      }
       .card_container{
         position: relative;
         width: 250px;
@@ -124,7 +168,7 @@
                 margin: 10px auto 0;
               }
             }
-            .card_dalete{
+            .card_delete_button{
               display: none;
             }
           }
@@ -176,8 +220,53 @@
       background-color: #FFF;
       margin: 0 auto;
       padding: 10px;
+      .leave_modal_container{
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        background-color: #FFF;
+        border-radius: 10px;
+        padding: 20px 10px;
+        &.show{
+          display: flex;
+          z-index: 3;
+          animation: modal_open 0.3s ease 0s forwards;
+        }
+        p{
+          font-size: 16px;
+          font-weight: bold;
+          margin-bottom: 15px;
+          span{
+            color: #F00;
+            text-decoration: underline;
+            font-weight: bold;
+          }
+        }
+        .button_area{
+          display: flex;
+          justify-content: space-around;
+          .leave_button{
+            width: 100px;
+            color: #FFF;
+            font-size: 12px;
+            font-weight: bold;
+            background-color: $second_color;
+            border-radius: 10px;
+            border-style: none;
+            padding: 10px;
+            margin: 0 10px;
+          }
+        }
+      }
       .card_container{
         .card_elements{
+          text-align: left;
           li{
             display: flex;
             align-items: center;
@@ -257,7 +346,7 @@
                   margin: 10px auto 0;
                 }
               }
-              .card_dalete{
+              .card_delete_button{
                 @include shadow(4px, 5px, 2px, 0.6);
                 position: absolute;
                 top: -15px;
@@ -290,5 +379,14 @@
   100% {
     opacity: 1;
     transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes modal_open{
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
