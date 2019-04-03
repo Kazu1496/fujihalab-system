@@ -11,10 +11,10 @@
         = @user.status? ? '出席中' : '退席中'
       %p
         %span 総出席時間:
-        #{@user.total_time} 時間
+        #{@user.total_time / 60} 時間
       %p
         %span 卒業まで　:
-        = state = (0 > (450 - @user.total_time)) ? "卒業おめでとう！" : 450 - @user.total_time
+        = state = (0 > (450 - @user.total_time / 60)) ? "卒業おめでとう！" : 450 - @user.total_time / 60
         時間
       - if @current_user == @user
         %p

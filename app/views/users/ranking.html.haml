@@ -18,7 +18,7 @@
               = user.status? ? '出席中' : '退席中'
             %p
               総在室時間：
-              #{user.total_time} 時間
+              #{user.total_time / 60} 時間
           = link_to user_path(user), class: "show_more" do
             もっとみる
             = icon('fas','arrow-right')

@@ -7,9 +7,9 @@ Rails.application.routes.draw do
 
   get 'ranking', to: 'users#ranking'
   get 'member', to: 'users#member'
+  get 'leave', to: 'users#leave'
 
   resources :users do
-    get 'leave', to: 'users#leave'
     resources :existences, only: [:edit, :update]
   end
 
