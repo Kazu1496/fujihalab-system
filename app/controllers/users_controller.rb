@@ -124,6 +124,32 @@ class UsersController < ApplicationController
     end
   end
 
+  def leave
+    now_time = Time.now()
+    user = User.find_by(id: @current_user.id)
+    existences = Existence.where(user_id: user.id)
+    existence = existences.order(:created_at).last
+    existence.update!(exit_time: update_time(nil, now_time))
+    total_time = total_time(existences)
+
+    #delete_pixel
+    delete_pixel(user, now_time.strftime("%Y%m%d"))
+
+    username = user.nickname.present? ? user.nickname : user.name
+    respond_to do |format|
+      if create_pixel(user, now_time, total_time) && user.status != false # CreatePixel
+        # Slack退席通知処理
+        slack_notification("#{username}さんが退席しました。")
+        user.update!(status: false, total_time: total_time)
+
+        format.html { redirect_to root_path, notice: '退席しました。' }
+      else
+        flash[:alert] = "退席することができませんでした。再度やり直してください"
+        format.html { redirect_to :index }
+      end
+    end
+  end
+
   private
     def set_user
       @user = User.find(params[:id])

@@ -1,0 +1,8 @@
+.leave_modal_container.modal{data: {index: index}}
+  %p
+    本当に
+    %span 退席
+    してもよろしいですか？
+  .button_area
+    = link_to 'はい', user_leave_path(user), class: "leave_button"
+    = link_to 'いいえ', 'javascript:void(0)', class: "leave_button modal_close", data: {index: index}
