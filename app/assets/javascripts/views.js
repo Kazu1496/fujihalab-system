@@ -85,17 +85,28 @@ window.onload = function(){
     };
   };
 
+  const cards = document.querySelectorAll('.card_elements');
+
+  function transition() {
+    if (this.classList.contains('show')) {
+      this.classList.remove('show')
+    } else {
+      this.classList.add('show');
+    }
+  }
+  cards.forEach(card => card.addEventListener('click', transition));
+
   // モーダルアニメーション
-  const openModals = document.getElementsByClassName('modal');
+  const openModal = document.getElementById('leave_modal');
   const modalOverlay = document.getElementById('modal_overlay');
 
-  if(openModals[0] && modalOverlay){
+  if(openModal && modalOverlay){
     document.addEventListener('click', function(event){
       if(event.target.classList.contains('modal_open')){
-        toggleModal.call(openModals[event.target.dataset.index]);
+        toggleModal.call(openModal);
       }
       else if(event.target.classList.contains('modal_close')){
-        toggleModal.call(openModals[event.target.dataset.index]);
+        toggleModal.call(openModal);
       }
     }, false);
 
@@ -109,17 +120,6 @@ window.onload = function(){
       };
     };
   };
-
-  const cards = document.querySelectorAll('.card_elements');
-
-  function transition() {
-    if (this.classList.contains('show')) {
-      this.classList.remove('show')
-    } else {
-      this.classList.add('show');
-    }
-  }
-  cards.forEach(card => card.addEventListener('click', transition));
 
   // バリデーション
   $('#registration_form').parsley();

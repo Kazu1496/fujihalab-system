@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
       existences.each do |existence|
         if existence.exit_time.present?
           sec = (existence.exit_time.to_time - existence.enter_time.to_time).to_i
-          total_time += sec / 3600
+          total_time += sec / 60
         end
       end
     end
