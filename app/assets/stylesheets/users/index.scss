@@ -70,6 +70,8 @@
               margin: 0 10px;
             }
             .message{
+              display: flex;
+              align-items: center;
               width: 230px;
               height: 60px;
               font-size: 16px;
@@ -267,6 +269,8 @@
                 text-overflow: ellipsis;
               }
               .message{
+                display: flex;
+                align-items: center;
                 width: 200px;
                 height: 40px;
                 font-size: 13px;
