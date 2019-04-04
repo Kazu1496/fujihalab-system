@@ -29,7 +29,7 @@ class ExistencesController < ApplicationController
     delete_pixel(user, @existence.enter_time.strftime("%Y%m%d"))
 
     respond_to do |format|
-      if create_pixel(user, @existence.enter_time, total_time) #Create Pixel
+      if create_pixel(user, @existence.enter_time, total_time(existences)) #Create Pixel
         format.html { redirect_to user_path(@existence.user_id), notice: '在籍情報を更新しました。' }
       else
         flash[:alert] = "在籍情報の更新ができませんでした。再度やり直してください"
