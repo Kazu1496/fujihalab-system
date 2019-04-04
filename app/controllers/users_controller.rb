@@ -133,12 +133,17 @@ class UsersController < ApplicationController
       existence.update!(exit_time: update_time(nil, now_time))
       total_time = total_time(existences)
 
+      day_total_time = total_time(Existence.where(
+        user_id: user.id,
+        enter_time: now_time.in_time_zone.all_day
+      ))
+
       #delete_pixel
       delete_pixel(user, now_time.strftime("%Y%m%d"))
 
       username = user.nickname.present? ? user.nickname : user.name
       respond_to do |format|
-        if create_pixel(user, now_time, total_time) # CreatePixel
+        if create_pixel(user, now_time, day_total_time) # CreatePixel
           # Slack退席通知処理
           slack_notification("#{username}さんが退席しました。")
           user.update!(status: false, total_time: total_time)
