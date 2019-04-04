@@ -8,4 +8,3 @@ function pb() {
     -i inventory/hosts \
     playbooks/$1
 }
-

@@ -5,10 +5,10 @@
   tasks:
     - name: mysql demonの立ち上げ
       sudo: yes
-      shell: sudo service mysqld start
+      shell: systemctl start mysqld
 
     - name: db create and db migrate
-      shell: bundle install --without test development &&rake db:create RAILS_ENV=production && rake db:migrate RAILS_ENV=production
+      shell: bundle install --without test development &&rake db:create RAILS_ENV=staging && rake db:migrate RAILS_ENV=staging
       args:
         chdir: /var/www/fujihalab-system/
 
