@@ -62,6 +62,13 @@
           }
           .right_elements{
             a{
+              span{
+                width: 180px;
+                font-weight: bold;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
               img{
                 border-radius: 50%;
                 object-fit: cover;
@@ -206,6 +213,12 @@
                 color: $primary_white_text;
                 font-weight: bold;
                 text-decoration: none;
+                p{
+                  width: 200px;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                }
                 i{
                   width: 30px;
                   font-size: 25px;

@@ -10,6 +10,7 @@
     .image_field
       = f.input :picture
       = user_image_tag(@user, "preview_img", 80, 80)
+    = f.input :message
     = f.input :address
     = f.input :password
     = f.input :password_confirmation

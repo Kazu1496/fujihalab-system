@@ -12,7 +12,7 @@
         .right_elements
           = link_to "ログアウト", logout_path, method: :delete
           = link_to user_path(@current_user) do
-            = user_name(@current_user)
+            %span= user_name(@current_user)
             = user_image_tag(@current_user, '', 30, 30)
   #header_elements_sp
     = link_to root_path, id: "logo" do
@@ -28,7 +28,7 @@
           %li
             = link_to user_path(@current_user) do
               = user_image_tag(@current_user, '', 30, 30)
-              = user_name(@current_user)
+              %p= user_name(@current_user)
           %li
             = link_to root_path do
               = icon('fas', 'address-book')
