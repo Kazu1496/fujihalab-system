@@ -54,9 +54,13 @@
           display: flex;
           flex-direction: column;
           .name{
+            width: 320px;
             color: $secondary_black_text;
             font-size: 24px;
             font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
           .user_status{
             display: flex;
@@ -129,9 +133,13 @@
           flex-direction: column;
           margin-left: 10px;
           .name{
+            width: 150px;
             color: $secondary_black_text;
             font-size: 16px;
             font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
           .user_status{
             display: flex;

@@ -12,7 +12,9 @@
             %li.side.front
               = user_image_tag(user, "", 300, 300)
               .user_elements
-                %p= user_name(user)
+                %p.name= user_name(user)
+                - if user.message.present?
+                  %p.message= user.message
                 = link_to "javascript:void(0)", class: "show_card", data: {index: index} do
                   Show
                   = icon('fas','arrow-right')
