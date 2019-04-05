@@ -73,8 +73,7 @@
               display: flex;
               align-items: center;
               width: 230px;
-              height: 60px;
-              font-size: 16px;
+              font-size: 14px;
               text-align: left;
               overflow: hidden;
               text-overflow: ellipsis;
@@ -91,6 +90,7 @@
           background-color: #F7F7F7;
           h2{
             width: 90%;
+            color: $secondary_black_text;
             font-size: 20px;
             font-weight: bold;
             text-align: center;
@@ -272,7 +272,6 @@
                 display: flex;
                 align-items: center;
                 width: 200px;
-                height: 40px;
                 font-size: 13px;
                 text-align: left;
                 overflow: hidden;
