@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get 'member', to: 'users#member'
   get 'leave', to: 'users#leave'
 
+  get 'privacy-policy', to: 'homes#privacy_policy'
+
   resources :users do
     resources :existences, only: [:edit, :update]
   end
