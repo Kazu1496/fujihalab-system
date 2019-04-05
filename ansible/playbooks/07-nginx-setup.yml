@@ -4,6 +4,7 @@
   remote_user: ec2-user
   tasks:
     - name: setup nginx
+      sudo: yes
       yum: name=nginx state=present
 
     - name: "nginx 設定ファイルの設置"
@@ -18,4 +19,4 @@
 
     - name: nginxの起動
       sudo: yes
-      shell: service nginx start
+      shell: systemctl start nginx
