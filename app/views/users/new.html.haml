@@ -12,6 +12,10 @@
     = f.input :password, label: 'パスワード'
     = f.input :password_confirmation, label: 'パスワード（確認）', required: true
     .action
+      %p
+        「登録する」をクリックすることで、
+        = link_to 'プライバシーポリシー', privacy_policy_path
+        に同意するものとします。
       = f.submit '登録する'
 
     = link_to 'ログインページに戻る', login_path, class: "back_btn"
