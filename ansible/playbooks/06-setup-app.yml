@@ -5,10 +5,7 @@
   tasks:
     - name: /var/, /var/www/ ファイルの権限をec2-userに変更
       sudo: yes
-      file: path="{{ item.path }}" owner=ec2-user
-      with_items:
-        - { path: /var/}
-        - { path: /var/www/}
+      file: path=/var/www/ state=directory owner=ec2-user
 
     - name: clone fujihalab-system repo
       git:
