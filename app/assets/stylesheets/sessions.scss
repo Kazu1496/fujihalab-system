@@ -58,6 +58,10 @@
       }
       .action{
         text-align: center;
+        p{
+          font-size: 12px;
+          margin: 20px 0;
+        }
         input{
           width: 150px;
           color: #FFF;
@@ -136,6 +140,11 @@
       }
       .action{
         text-align: center;
+        p{
+          width: 75%;
+          font-size: 10px;
+          margin: 10px auto;
+        }
         input{
           width: 100px;
           color: #FFF;
