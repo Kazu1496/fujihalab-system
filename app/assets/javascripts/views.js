@@ -69,7 +69,7 @@ window.onload = function(){
       if(event.target.classList.contains('show_card')){
         toggleCard.call(openCards[event.target.dataset.index]);
       }
-      else if(event.target.classList.contains('card_dalete')){
+      else if(event.target.classList.contains('card_delete')){
         toggleCard.call(openCards[event.target.dataset.index]);
       }
     }, false);

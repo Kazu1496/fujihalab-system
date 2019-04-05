@@ -14,7 +14,7 @@
               .user_elements
                 %p.name= user_name(user)
                 - if user.message.present?
-                  %p.message= user.message
+                  %p.message= user.message.truncate(45)
                 = link_to "javascript:void(0)", class: "show_card", data: {index: index} do
                   Show
                   = icon('fas','arrow-right')
@@ -37,12 +37,12 @@
                         プロフィール設定 :
                         = link_to "Edit", edit_user_path(user)
                   - if @current_user == user
-                    = link_to '退席する', 'javascript:void(0)', class: "show_more modal_open card_dalete"
+                    = link_to '退席する', 'javascript:void(0)', class: "show_more modal_open card_delete", data: {index: index}
                   - else
                     = link_to user_path(user), class: "show_more" do
                       もっとみる
                       = icon('fas','arrow-right')
-                = icon('fas', 'times', class: "card_delete_button card_dalete", data: {index: index})
+                = icon('fas', 'times', class: "card_delete_button card_delete", data: {index: index})
   - else
     %p.any_user_text 現在出席中のユーザーは存在しません。
 
