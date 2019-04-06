@@ -17,3 +17,4 @@
 //= require parsley.min
 //= require parsley.i18n
 //= require_tree .
+//= require serviceworker-companion
