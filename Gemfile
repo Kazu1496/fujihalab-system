@@ -24,6 +24,7 @@ gem "font-awesome-sass"
 gem "jquery-rails"
 gem 'simple_form'
 gem 'will_paginate'
+gem 'serviceworker-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
