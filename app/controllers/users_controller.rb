@@ -4,23 +4,11 @@ class UsersController < ApplicationController
   before_action :already_sign_in?, only: [:new, :create]
   before_action :white_list_ip?, only: [:new, :create]
 
-  def index
-    @users = User.where(status: true)
-  end
-
   def show
     @existences = @user.existences.order_by_enter_at.paginate(page: params[:page], per_page: 5)
   end
 
   def edit; end
-
-  def ranking
-    @users = User.all.order(total_time: :desc)
-  end
-
-  def member
-    @users = User.all
-  end
 
   def new
     @user = User.new
