@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       user_http = Net::HTTP.new(user_uri.host, user_uri.port)
 
       user_http.use_ssl = true
-      user_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      user_http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
       user_post_params = {
         token: 'fujihalabtoken',
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
       graph_http = Net::HTTP.new(graph_uri.host, graph_uri.port)
 
       graph_http.use_ssl = true
-      graph_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      graph_http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
       graph_post_params = {
         id: "access-graph",
@@ -82,7 +82,7 @@ class UsersController < ApplicationController
           delete_user_http = Net::HTTP.new(delete_user_uri.host, delete_user_uri.port)
 
           delete_user_http.use_ssl = true
-          delete_user_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+          delete_user_http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
           delete_user_req = Net::HTTP::Delete.new(delete_user_uri)
           delete_user_req["X-USER-TOKEN"] = 'fujihalabtoken'

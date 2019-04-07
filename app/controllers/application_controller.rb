@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
     pixel_http = Net::HTTP.new(pixel_uri.host, pixel_uri.port)
 
     pixel_http.use_ssl = true
-    pixel_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    pixel_http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
     pixel_post_params = {
       date: date.strftime("%Y%m%d"),
@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
     delete_pixel_http = Net::HTTP.new(delete_pixel_uri.host, delete_pixel_uri.port)
 
     delete_pixel_http.use_ssl = true
-    delete_pixel_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    delete_pixel_http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
     delete_pixel_req = Net::HTTP::Delete.new(delete_pixel_uri)
     delete_pixel_req["X-USER-TOKEN"] = 'fujihalabtoken'
