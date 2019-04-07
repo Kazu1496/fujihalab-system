@@ -25,6 +25,7 @@ class Api::V1::ExistencesController < ApplicationController
           existence = user.existences.order(:created_at).create(user_id: user.id)
           user.update!(status: true)
           existence.update!(enter_time: update_time(nil, now_time))
+          render json: {status: 200, message: "#{username}さんが出席しました。"}
         else
           existence = user.existences.order(:created_at).last
           existence.update!(exit_time: update_time(nil, now_time))
