@@ -6,8 +6,8 @@ module Attendance extend self
 
     users.each do |user|
       latest_existence = user.existences.last
-      latest_existence.update(exit_time: now_time - 60)
-      
+      latest_existence.update(exit_time: now_time)
+
       existences = Existence.where(user_id: user.id)
       total_time = controller.total_time(existences)
 
@@ -20,7 +20,7 @@ module Attendance extend self
         status: true,
         total_time: total_time
       )
-      user.existences.create(user_id: user.id, enter_time: now_time)
+      user.existences.create(user_id: user.id, enter_time: now_time + 60)
     end
   end
 end
