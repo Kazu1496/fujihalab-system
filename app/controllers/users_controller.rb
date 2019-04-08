@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :already_sign_in?, only: [:new, :create]
   before_action :white_list_ip?, only: [:new, :create]
+  before_action :current_user?, only: [:edit, :update]
 
   def show
     @existences = @user.existences.order_by_enter_at.paginate(page: params[:page], per_page: 5)
@@ -156,5 +157,10 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :nickname, :picture, :message, :password, :password_confirmation, :address)
+    end
+
+    def current_user?
+      user = User.find_by(id: params[:id])
+      redirect_to user_path(user) unless user == current_user
     end
 end
