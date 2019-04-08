@@ -1,4 +1,5 @@
-- provide(:title, "#{@user.name}の情報")
+- username = @user.nickname.present? ? @user.nickname : @user.name
+- provide(:title, "#{username}の情報")
 
 #user_show_container
   %h1
