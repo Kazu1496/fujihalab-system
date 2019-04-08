@@ -1,5 +1,6 @@
 class ExistencesController < ApplicationController
   before_action :set_access, only: [:edit, :update]
+  before_action :current_user?, only: [:edit, :update]
 
   def edit; end
 
@@ -53,5 +54,10 @@ class ExistencesController < ApplicationController
       else
         result = true
       end
+    end
+
+    def current_user?
+      user = User.find_by(id: params[:user_id])
+      redirect_to user_path(user) unless user == current_user
     end
 end
