@@ -64,7 +64,7 @@ class UsersController < ApplicationController
       graph_result = JSON.parse(graph_res.body)
     rescue
       flash[:alert] = "ユーザーIDには半角英数文字またはハイフン（-）のみ使用できます。"
-      render :new and return
+      render :new, status: 400 and return
     end
 
     respond_to do |format|
@@ -94,11 +94,11 @@ class UsersController < ApplicationController
           logger.debug(delete_user_result)
 
           flash[:alert] = "ユーザ登録ができませんでした。再度やり直してください"
-          format.html { render :new }
+          format.html { render :new, status: 400 }
         end
       else
         flash[:alert] = "既にPixe.laに登録済みのユーザー名のため登録に失敗しました。"
-        format.html { render :new }
+        format.html { render :new, status: 400 }
       end
     end
   end
@@ -109,7 +109,7 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: 'ユーザー情報を更新しました。' }
       else
         flash[:alert] = "ユーザー情報の更新ができませんでした。再度やり直してください"
-        format.html { render :edit }
+        format.html { render :edit, status: 400 }
       end
     end
   end
@@ -141,7 +141,7 @@ class UsersController < ApplicationController
           format.html { redirect_to root_path, notice: '退席しました。' }
         else
           flash[:alert] = "退席することができませんでした。再度やり直してください"
-          format.html { redirect_to :index }
+          format.html { render :index }
         end
       end
     else
