@@ -14,5 +14,4 @@ class HomesController < ApplicationController
   end
 
   def privacy_policy; end
-
 end

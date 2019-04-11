@@ -14,7 +14,7 @@ class Api::V1::ExistencesController < ApplicationController
 
       if user.present?
         if user.status == status
-          render json: {status: 400, message: "既に出席もしくは退席中のため失敗しました。"} and return
+          render status: 400 ,json: {status: 400, message: "既に出席もしくは退席中のため失敗しました。"} and return
         end
 
         username = user.nickname.present? ? user.nickname : user.name
@@ -25,7 +25,7 @@ class Api::V1::ExistencesController < ApplicationController
           existence = user.existences.order(:created_at).create(user_id: user.id)
           user.update!(status: true)
           existence.update!(enter_time: update_time(nil, now_time))
-          render json: {status: 200, message: "#{username}さんが出席しました。"}
+          render status: 200, json: {status: 200, message: "#{username}さんが出席しました。"}
         else
           existence = user.existences.order(:created_at).last
           existence.update!(exit_time: update_time(nil, now_time))
@@ -44,16 +44,16 @@ class Api::V1::ExistencesController < ApplicationController
             slack_notification("#{username}さんが退席しました。")
 
             user.update!(status: false, total_time: total_time)
-            render json: {status: 200, message: "Pixel create successfully!"}
+            render status: 200, json: {status: 200, message: "#{username}さんが退席しました。"}
           else
-            render json: {status: 400, message: "Pixel create faild..."}
+            render status: 400, json: {status: 400, message: "問題が発生したため、#{username}さんが退席できませんでした。"}
           end
         end
       else
-        render json: {status: 400, message: "ユーザー情報を取得できませんでした。"}
+        render status: 400, json: {status: 400, message: "ユーザー情報を取得できませんでした。"}
       end
     rescue => e
-      render json: {status: 400, message: {class: e.class, error: e.message}}
+      render status: 400, json: {status: 400, message: {class: e.class, error: e.message}}
     end
   end
 end
