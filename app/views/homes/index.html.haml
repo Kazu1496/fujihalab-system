@@ -31,7 +31,7 @@
                       時間
                     %p
                       卒業まで :
-                      = state = (0 > (450 - user.total_time / 60)) ? "Congratulations on your graduation!" : "#{450 - user.total_time / 60} 時間"
+                      = state = (0 > (300 - user.total_time / 60)) ? "Congratulations on your graduation!" : "#{300 - user.total_time / 60} 時間"
                     - if @current_user == user
                       %p
                         プロフィール設定 :
