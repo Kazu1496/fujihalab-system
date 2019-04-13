@@ -93,6 +93,11 @@
   }
 }
 @media all and (max-width: 768px){
+  #Smallchat{
+    iframe{
+      z-index: 0 !important;
+    }
+  }
   body{
     display: flex;
     flex-direction: column;
