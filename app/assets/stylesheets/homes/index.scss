@@ -259,9 +259,10 @@
             .user_elements{
               display: flex;
               flex-direction: column;
+              width: 150px;
               font-weight: bold;
               .name{
-                width: 200px;
+                width: 100%;
                 color: $secondary_black_text;
                 font-weight: bold;
                 white-space: nowrap;
@@ -271,7 +272,7 @@
               .message{
                 display: flex;
                 align-items: center;
-                width: 200px;
+                width: 100%;
                 font-size: 13px;
                 text-align: left;
                 overflow: hidden;
