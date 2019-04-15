@@ -255,6 +255,8 @@
               height: 60px;
               border-radius: 50%;
               margin-right: 20px;
+              object-fit: cover;
+              font-family: 'object-fit: cover;';
             }
             .user_elements{
               display: flex;
@@ -313,6 +315,8 @@
                 border-radius: 50%;
                 width: 160px;
                 height: 160px;
+                object-fit: cover;
+                font-family: 'object-fit: cover;';
                 margin-top: 25px;
               }
               &_elements{
