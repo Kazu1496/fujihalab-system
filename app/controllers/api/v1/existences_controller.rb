@@ -14,7 +14,7 @@ class Api::V1::ExistencesController < ApplicationController
 
       if user.present?
         if user.status == status
-          render status: 400 ,json: {status: 400, message: "既に出席もしくは退席中のため失敗しました。"} and return
+          render status: 200 ,json: {status: 200, message: "既に出席もしくは退席中のため失敗しました。"} and return
         end
 
         username = user.nickname.present? ? user.nickname : user.name
