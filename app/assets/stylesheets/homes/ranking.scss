@@ -39,11 +39,14 @@
             position: absolute;
             top: 0;
             left: 0;
+            display: inline-block;
+            width: 25px;
+            height: 25px;
             color: #FFF;
             font-size: 16px;
             font-weight: bold;
-            background-color: $second_color;
-            padding: 3px 10px;
+            text-align: center;
+            background-color: #FFA000;
           }
           img{
             object-fit: cover;
@@ -91,9 +94,7 @@
     }
     ul{
       @include shadow(4px, 10px, 3px, 0.5);
-      overflow: scroll;
       width: 85%;
-      max-height: 500px;
       border-radius: 10px;
       background-color: #FFF;
       padding: 10px 0;
@@ -101,6 +102,7 @@
       li{
         display: flex;
         align-items: center;
+        width: calc(100% - 20px);
         padding: 15px 0;
         margin: 0 10px;
         &:not(:last-child){
@@ -110,16 +112,18 @@
           position: relative;
           width: 100px;
           height: 100px;
-          margin: 0 10px;
           span{
             position: absolute;
             top: 0;
             left: 0;
+            display: inline-block;
+            width: 25px;
+            height: 25px;
             color: #FFF;
             font-size: 16px;
             font-weight: bold;
-            background-color: $second_color;
-            padding: 3px 10px;
+            text-align: center;
+            background-color: #FFA000;
           }
           img{
             width: 100px;
@@ -131,9 +135,10 @@
         .user_items{
           display: flex;
           flex-direction: column;
-          margin-left: 10px;
+          width: calc(100% - 120px);
+          margin-left: 20px;
           .name{
-            width: 150px;
+            width: 100%;
             color: $secondary_black_text;
             font-size: 16px;
             font-weight: bold;
