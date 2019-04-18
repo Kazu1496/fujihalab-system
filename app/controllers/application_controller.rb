@@ -42,6 +42,18 @@ class ApplicationController < ActionController::Base
     total_time
   end
 
+  def update_time(current_time, updated_time)
+    if current_time.present?
+      date = current_time.strftime("%Y%m%d")
+      datetime = updated_time.strftime("%H%M")
+      updated_date = date + datetime
+    else
+      datetime = updated_time.strftime("%Y%m%d%H%M")
+      updated_date = datetime
+    end
+    updated_date.to_time
+  end
+
   def create_pixel(user, date, total_time)
     quantity = (total_time / 60) > 1 ? (total_time / 60) : 1
 
@@ -82,17 +94,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-    def update_time(current_time, updated_time)
-      if current_time.present?
-        date = current_time.strftime("%Y%m%d")
-        datetime = updated_time.strftime("%H%M")
-        updated_date = date + datetime
-      else
-        datetime = updated_time.strftime("%Y%m%d%H%M")
-        updated_date = datetime
-      end
-      updated_date.to_time
-    end
 
     def require_sign_in!
       redirect_to login_path unless signed_in?
