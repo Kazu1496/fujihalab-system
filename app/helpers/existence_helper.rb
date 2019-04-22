@@ -14,7 +14,7 @@ module ExistenceHelper
       min = format("%0*d", 2, (sec / 60 - hour * 60))       #TODO: リファクタリングしろ
       staytime = (format("%0*d", 2, hour).to_s + ':' + min)
     else
-      staytime = '在室中'
+      staytime = '出席中'
     end
     staytime
   end
