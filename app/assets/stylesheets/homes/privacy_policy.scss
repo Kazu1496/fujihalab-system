@@ -1,0 +1,81 @@
+@import "settings";
+
+@media all and (min-width: 769px){
+  #privacy_container{
+    width: 100%;
+    text-align: center;
+    margin: 60px auto;
+    h1{
+      font-size: 45px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      span{
+        display: block;
+        font-size: 20px;
+        font-weight: bold;
+      }
+    }
+    .agreement_text{
+      width: 700px;
+      text-align: left;
+      line-height: 30px;
+      background-color: #FFF;
+      border-radius: 10px;
+      padding: 40px;
+      margin: 0 auto;
+      @include shadow(4px, 10px, 3px, 0.5);
+      .agreement_text_block{
+        margin: 30px 0;
+        strong{
+          text-decoration: underline;
+          font-weight: bold;
+        }
+        ul{
+          list-style: initial;
+          margin: 20px 0 0 20px;
+        }
+      }
+    }
+  }
+}
+@media all and (max-width: 768px){
+  #privacy_container{
+    width: 100%;
+    text-align: center;
+    margin: 20px auto 40px;
+    h1{
+      font-size: 30px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      span{
+        display: block;
+        font-size: 16px;
+        font-weight: bold;
+      }
+    }
+    .agreement_text{
+      width: 70%;
+      font-size: 13px;
+      text-align: left;
+      line-height: 20px;
+      background-color: #FFF;
+      border-radius: 10px;
+      padding: 30px;
+      margin: 0 auto;
+      @include shadow(4px, 10px, 3px, 0.5);
+      .agreement_text_block{
+        margin: 20px 0;
+        strong{
+          text-decoration: underline;
+          font-weight: bold;
+        }
+        ul{
+          list-style: initial;
+          margin: 20px 0 0 20px;
+        }
+      }
+    }
+  }
+}

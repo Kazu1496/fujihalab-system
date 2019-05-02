@@ -1,4 +1,4 @@
-window.onload = function(){
+document.addEventListener('DOMContentLoaded', function(){
   // アラートメッセージのフェードアウト処理
   const alert_message = document.getElementById('alert');
   if (alert_message){
@@ -9,7 +9,7 @@ window.onload = function(){
       });
     }, 1500);
   };
-
+  
   //　ドロワー周りの処理
   const drawerMenu = document.getElementById('drawer_elements');
   const drawerDeletebtn = document.getElementById('drawer_dalete');
@@ -69,7 +69,7 @@ window.onload = function(){
       if(event.target.classList.contains('show_card')){
         toggleCard.call(openCards[event.target.dataset.index]);
       }
-      else if(event.target.classList.contains('card_dalete')){
+      else if(event.target.classList.contains('card_delete')){
         toggleCard.call(openCards[event.target.dataset.index]);
       }
     }, false);
@@ -123,4 +123,4 @@ window.onload = function(){
 
   // バリデーション
   $('#registration_form').parsley();
-};
+}, false);

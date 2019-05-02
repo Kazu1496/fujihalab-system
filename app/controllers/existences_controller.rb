@@ -1,5 +1,6 @@
 class ExistencesController < ApplicationController
   before_action :set_access, only: [:edit, :update]
+  before_action :current_user?, only: [:edit, :update]
 
   def edit; end
 
@@ -29,7 +30,7 @@ class ExistencesController < ApplicationController
     delete_pixel(user, @existence.enter_time.strftime("%Y%m%d"))
 
     respond_to do |format|
-      if create_pixel(user, @existence.enter_time, total_time) #Create Pixel
+      if create_pixel(user, @existence.enter_time, total_time(existences)) #Create Pixel
         format.html { redirect_to user_path(@existence.user_id), notice: '在籍情報を更新しました。' }
       else
         flash[:alert] = "在籍情報の更新ができませんでした。再度やり直してください"
@@ -44,14 +45,23 @@ class ExistencesController < ApplicationController
     end
 
     def update_condition(existence, enter_time, exit_time)
-      if existence.next.present? && existence.previous.present?
-        result = (exit_time <= existence.next.enter_time && existence.previous.exit_time <= enter_time) ? true : false
-      elsif existence.next.present? && enter_time
-        result = (exit_time <= existence.next.enter_time) ? true : false
-      elsif existence.previous.present?
-        result = (existence.previous.exit_time <= enter_time) ? true : false
+      if enter_time < exit_time
+        if existence.next.present? && existence.previous.present?
+          result = (exit_time <= existence.next.enter_time && existence.previous.exit_time <= enter_time) ? true : false
+        elsif existence.next.present? && enter_time
+          result = (exit_time <= existence.next.enter_time) ? true : false
+        elsif existence.previous.present?
+          result = (existence.previous.exit_time <= enter_time) ? true : false
+        else
+          result = true
+        end
       else
-        result = true
+        result = false
       end
+    end
+
+    def current_user?
+      user = User.find_by(id: params[:user_id])
+      redirect_to user_path(user) unless user == current_user
     end
 end

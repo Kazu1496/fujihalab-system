@@ -1,9 +1,9 @@
-- provide(:title, "#{@user.name}の情報")
+- username = @user.nickname.present? ? @user.nickname : @user.name
+- provide(:title, "#{username}の情報")
 
 #user_show_container
   %h1
-    %span #{user_name(@user)}の情報
-    Info #{user_name(@user)}
+    #{user_name(@user)}の情報
   .user_elements
     .user_elements_text
       %p
@@ -14,8 +14,7 @@
         #{@user.total_time / 60} 時間
       %p
         %span 卒業まで　:
-        = state = (0 > (450 - @user.total_time / 60)) ? "卒業おめでとう！" : 450 - @user.total_time / 60
-        時間
+        = state = (0 > (300 - @user.total_time / 60)) ? "卒業おめでとう！" : "#{300 - @user.total_time / 60}時間"
       - if @current_user == @user
         %p
           %span プロフィール設定:

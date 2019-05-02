@@ -5,6 +5,9 @@
 #   gem 'sqlite3'
 #
 default: &default
+  encoding: utf8mb4
+  charset: utf8mb4
+  collation: utf8mb4_unicode_ci
   adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
@@ -23,7 +26,6 @@ test:
 staging:
   <<: *default
   adapter: mysql2
-  encoding: utf8
   database: fujihalab-system_staging
   pool: 5
   username: root
@@ -33,7 +35,6 @@ staging:
 production:
   <<: *default
   adapter: mysql2
-  encoding: utf8
   database: fujihalab-system_production
   pool: 5
   username: root

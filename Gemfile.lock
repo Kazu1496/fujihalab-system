@@ -53,6 +53,7 @@ GEM
     bindex (0.5.0)
     bootsnap (1.4.1)
       msgpack (~> 1.0)
+    brakeman (4.5.0)
     builder (3.2.3)
     byebug (11.0.1)
     capybara (3.15.0)
@@ -261,6 +262,8 @@ GEM
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
+    serviceworker-rails (0.5.5)
+      railties (>= 3.1)
     sexp_processor (4.12.0)
     shellany (0.0.1)
     simple_form (4.1.0)
@@ -315,6 +318,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   bootsnap (>= 1.1.0)
+  brakeman
   byebug
   capybara (>= 2.15)
   carrierwave
@@ -344,6 +348,7 @@ DEPENDENCIES
   ruby-debug-ide (= 0.7.0.beta7)
   sass-rails (~> 5.0)
   selenium-webdriver
+  serviceworker-rails
   simple_form
   slack-notifier
   spring

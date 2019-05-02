@@ -62,6 +62,9 @@
           }
           .right_elements{
             a{
+              span{
+                font-weight: bold;
+              }
               img{
                 border-radius: 50%;
                 object-fit: cover;
@@ -90,6 +93,11 @@
   }
 }
 @media all and (max-width: 768px){
+  #Smallchat{
+    iframe{
+      z-index: 0 !important;
+    }
+  }
   body{
     display: flex;
     flex-direction: column;
@@ -164,6 +172,8 @@
           margin-right: 15px;
           img{
             border-radius: 50%;
+            object-fit: cover;
+            font-family: 'object-fit: cover;';
           }
         }
         nav{
@@ -206,6 +216,12 @@
                 color: $primary_white_text;
                 font-weight: bold;
                 text-decoration: none;
+                p{
+                  width: 200px;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                }
                 i{
                   width: 30px;
                   font-size: 25px;
@@ -238,6 +254,7 @@
         color: $primary_white_text;
         font-size: 10px;
         font-weight: bold;
+        text-align: center;
       }
     }
   }

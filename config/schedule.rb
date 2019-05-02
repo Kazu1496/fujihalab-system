@@ -8,7 +8,7 @@ rails_env = ENV['RAILS_ENV'] ||= 'development'
 set :environment, rails_env
 set :output, "#{Rails.root}/log/crontab.log"
 
-every 1.day, at: "11:59 pm" do
+every 1.day, at: "2:59 pm" do
   rake "attendance:attendance"
 end
 

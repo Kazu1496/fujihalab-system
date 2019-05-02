@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         format.html { redirect_to root_path, notice: 'ログインに成功しました。' }
       else
         flash.now[:alert] = "ログインできませんでした。ユーザー名またはメールアドレスを確認してください。"
-        format.html { render :new }
+        format.html { render :new, status: 400 }
       end
     end
   end
@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
       @user = User.find_by!(name: session_params[:name])
     rescue
       flash[:alert] = "ログインできませんでした。ユーザー名またはメールアドレスを確認してください。"
-      render action: 'new'
+      render action: 'new', status: 403
     end
 
     def session_params

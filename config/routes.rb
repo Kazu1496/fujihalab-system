@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
-  root to: 'users#index'
+  root to: 'homes#index'
+
+  get 'ranking', to: 'homes#ranking'
+  get 'member', to: 'homes#member'
+  get 'privacy-policy', to: 'homes#privacy_policy'
 
   get     'login',   to: 'sessions#new'
   post    'login',   to: 'sessions#create'
   delete  'logout',  to: 'sessions#destroy'
 
-  get 'ranking', to: 'users#ranking'
-  get 'member', to: 'users#member'
   get 'leave', to: 'users#leave'
-
-  resources :users do
+  resources :users, only: [:show, :edit, :new, :create, :update] do
     resources :existences, only: [:edit, :update]
   end
 

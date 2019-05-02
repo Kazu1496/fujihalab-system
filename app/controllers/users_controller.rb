@@ -2,24 +2,14 @@ class UsersController < ApplicationController
   skip_before_action :require_sign_in!, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :already_sign_in?, only: [:new, :create]
-
-  def index
-    @users = User.where(status: true)
-  end
+  before_action :white_list_ip?, only: [:new, :create]
+  before_action :current_user?, only: [:edit, :update]
 
   def show
     @existences = @user.existences.order_by_enter_at.paginate(page: params[:page], per_page: 5)
   end
 
   def edit; end
-
-  def ranking
-    @users = User.all.order(total_time: :desc)
-  end
-
-  def member
-    @users = User.all
-  end
 
   def new
     @user = User.new
@@ -36,7 +26,7 @@ class UsersController < ApplicationController
       user_http = Net::HTTP.new(user_uri.host, user_uri.port)
 
       user_http.use_ssl = true
-      user_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      user_http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
       user_post_params = {
         token: 'fujihalabtoken',
@@ -56,7 +46,7 @@ class UsersController < ApplicationController
       graph_http = Net::HTTP.new(graph_uri.host, graph_uri.port)
 
       graph_http.use_ssl = true
-      graph_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      graph_http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
       graph_post_params = {
         id: "access-graph",
@@ -74,7 +64,7 @@ class UsersController < ApplicationController
       graph_result = JSON.parse(graph_res.body)
     rescue
       flash[:alert] = "ユーザーIDには半角英数文字またはハイフン（-）のみ使用できます。"
-      render :new and return
+      render :new, status: 400 and return
     end
 
     respond_to do |format|
@@ -93,7 +83,7 @@ class UsersController < ApplicationController
           delete_user_http = Net::HTTP.new(delete_user_uri.host, delete_user_uri.port)
 
           delete_user_http.use_ssl = true
-          delete_user_http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+          delete_user_http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
           delete_user_req = Net::HTTP::Delete.new(delete_user_uri)
           delete_user_req["X-USER-TOKEN"] = 'fujihalabtoken'
@@ -104,11 +94,11 @@ class UsersController < ApplicationController
           logger.debug(delete_user_result)
 
           flash[:alert] = "ユーザ登録ができませんでした。再度やり直してください"
-          format.html { render :new }
+          format.html { render :new, status: 400 }
         end
       else
         flash[:alert] = "既にPixe.laに登録済みのユーザー名のため登録に失敗しました。"
-        format.html { render :new }
+        format.html { render :new, status: 400 }
       end
     end
   end
@@ -119,7 +109,7 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: 'ユーザー情報を更新しました。' }
       else
         flash[:alert] = "ユーザー情報の更新ができませんでした。再度やり直してください"
-        format.html { render :edit }
+        format.html { render :edit, status: 400 }
       end
     end
   end
@@ -133,12 +123,17 @@ class UsersController < ApplicationController
       existence.update!(exit_time: update_time(nil, now_time))
       total_time = total_time(existences)
 
+      day_total_time = total_time(Existence.where(
+        user_id: user.id,
+        enter_time: now_time.in_time_zone.all_day
+      ))
+
       #delete_pixel
       delete_pixel(user, now_time.strftime("%Y%m%d"))
 
       username = user.nickname.present? ? user.nickname : user.name
       respond_to do |format|
-        if create_pixel(user, now_time, total_time) # CreatePixel
+        if create_pixel(user, now_time, day_total_time) # CreatePixel
           # Slack退席通知処理
           slack_notification("#{username}さんが退席しました。")
           user.update!(status: false, total_time: total_time)
@@ -146,7 +141,7 @@ class UsersController < ApplicationController
           format.html { redirect_to root_path, notice: '退席しました。' }
         else
           flash[:alert] = "退席することができませんでした。再度やり直してください"
-          format.html { redirect_to :index }
+          format.html { render :index }
         end
       end
     else
@@ -161,6 +156,11 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :nickname, :picture, :password, :password_confirmation, :address)
+      params.require(:user).permit(:name, :nickname, :picture, :message, :password, :password_confirmation, :address)
+    end
+
+    def current_user?
+      user = User.find_by(id: params[:id])
+      redirect_to user_path(user) unless user == current_user
     end
 end

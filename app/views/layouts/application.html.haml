@@ -2,7 +2,7 @@
 %html
   %head
     %title
-      = "#{yield(:title)} | 藤原研入退室システム"
+      = "#{yield(:title)} | Fujihalab System"
     = csrf_meta_tags
     = csp_meta_tag
     %meta{charset: "utf-8"}
@@ -31,8 +31,8 @@
 
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
-
-  %head
+    %link{rel: "manifest", href: "manifest.json"}
+    %meta{name: "apple-mobile-web-app-capable", content: "yes"}
   %body
     #modal_overlay.open
     #drawer_overlay.open
@@ -42,3 +42,4 @@
     %main
       = yield
     = render "layouts/footer"
+    %script{src: "https://embed.small.chat/TBYNT83U3GHHT0L3KL.js", async: true}

@@ -58,11 +58,25 @@
           .user_elements{
             width: 100%;
             height: 100px;
-            p{
+            .name{
+              width: 230px;
               color: $secondary_black_text;
-              font-size: 24px;
+              font-size: 22px;
               font-weight: bold;
               text-align: left;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              margin: 0 10px;
+            }
+            .message{
+              display: flex;
+              align-items: center;
+              width: 230px;
+              font-size: 14px;
+              text-align: left;
+              overflow: hidden;
+              text-overflow: ellipsis;
               margin: 0 10px;
             }
             a{
@@ -75,10 +89,15 @@
           height: 100%;
           background-color: #F7F7F7;
           h2{
+            width: 90%;
+            color: $secondary_black_text;
             font-size: 20px;
             font-weight: bold;
             text-align: center;
-            margin-top: 15px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: 15px auto 0;
           }
           &_info{
             text-align: center;
@@ -155,7 +174,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -236,18 +255,38 @@
               height: 60px;
               border-radius: 50%;
               margin-right: 20px;
+              object-fit: cover;
+              font-family: 'object-fit: cover;';
             }
             .user_elements{
               display: flex;
               flex-direction: column;
-              color: $secondary_black_text;
+              width: 150px;
               font-weight: bold;
+              .name{
+                width: 100%;
+                color: $secondary_black_text;
+                font-weight: bold;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+              .message{
+                display: flex;
+                align-items: center;
+                width: 100%;
+                font-size: 13px;
+                text-align: left;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin: 5px 0;
+              }
             }
           }
           .user_card{
             @include shadow(4px,10px, 3px, 0.5);
             display: none;
-            position: absolute;
+            position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, 525px);
@@ -260,10 +299,14 @@
               animation: card_show 0.3s ease 0s forwards;
             }
             h2{
+              width: 90%;
               font-size: 20px;
               font-weight: bold;
               text-align: center;
-              margin-top: 20px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              margin: 20px auto 0;
             }
             &_info{
               text-align: center;
@@ -272,6 +315,8 @@
                 border-radius: 50%;
                 width: 160px;
                 height: 160px;
+                object-fit: cover;
+                font-family: 'object-fit: cover;';
                 margin-top: 25px;
               }
               &_elements{
@@ -311,7 +356,7 @@
                 font-size: 20px;
                 border-radius: 50%;
                 background-color: $third_color;
-                padding: 15px;
+                padding: 13px 15px;
               }
             }
           }
@@ -330,7 +375,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
