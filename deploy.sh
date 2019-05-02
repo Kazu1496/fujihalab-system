@@ -1,6 +1,5 @@
 #!bin/bash
 
-set  -eu
 cd `dirname $0`
 
 
@@ -12,28 +11,28 @@ if [[ -e `pwd|grep stg` ]]; then
 	else
 	ra_env=production
 fi
-echo "------$(ra_env)用のデプロイを実行します"
+echo "------${ra_env}用のデプロイを実行します"
 
 # ----
 
 echo -e "pullします"
-exec git pull
+`git pull`
 echo "serviceを落とします"
-exec kill -9 `cat tmp/pids/unicorn.pid`
+(kill -9 `cat tmp/pids/unicorn.pid`)
 
 read -p "db: migrateを実行しますか？[Y/n]" yn
 case "$yn" in 
-	[yY]*) exec "bundle exec rails db:migrate RAILS_ENV=$(ra_env)";;
+	[yY]*) (bundle exec rails db:migrate RAILS_ENV=${ra_env});;
 	*) echo "passed db:migrate";;
 esac
 
 read -p "assets:precompileを実行しますか？[Y/n]" yn
 case "$yn" in 
-	[yY]*) exec "bundle exec rails assets:precompile RAILS_ENV=$(ra_env)";;
+	[yY]*) (bundle exec rails assets:precompile RAILS_ENV=${ra_env});;
 	*) echo "passed assets precompile";;
 esac
 
 
 echo "unicornを再起動します"
-exec "bundle exec unicorn_rails -c config/unicorn.conf.rb -D -E $(ra_env)"
+(bundle exec unicorn_rails -c config/unicorn.conf.rb -D -E ${ra_env})
 
