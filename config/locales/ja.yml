@@ -1,6 +1,8 @@
 
 ---
 ja:
+  will_paginate:
+    page_gap: ...
   date:
     abbr_day_names:
     - 日
